@@ -12,6 +12,10 @@
 
 ---Git commands--------------
 
+<<<<<<< HEAD
 1. git branch -> this command show us branches
+=======
+1. git branch -r -> this command show us branches
+>>>>>>> origin/rekha
 2. git checkout dev -> this command change the working branch
 
