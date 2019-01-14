@@ -1,5 +1,3 @@
-# e_invite
-
 <h1>E-Invite</h1>
 
 ---To install this project. ----------
