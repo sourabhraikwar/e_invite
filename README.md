@@ -12,6 +12,6 @@
 
 ---Git commands--------------
 
-1. git branch -b -> this command show us branches
+1. git branch -> this command show us branches
 2. git checkout dev -> this command change the working branch
 
