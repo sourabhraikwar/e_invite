@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+{% load widget_tweaks %}
+{% block content %}
+<center>
+	<div class="container">
+		<h1>Registration form</h1>
+		<form method="post" action="">
+			{% csrf_token %}
+			<div class="form-group">
+				{{udata.title | add_class:"form-control" | attr:"placeholder:enter email"}}
+			</div>
+			<div class="row">
+				<div class="col">
+				{{udata.fname | add_class:"form-control" | attr:"placeholder:Enter first name"}}
+				</div>
+				<div class="col">
+			    {{udata.lname | add_class:"form-control" | attr:"placeholder:Enter last name"}}
+				</div>
+			</div>
+			<button type="submit">Register</button> 
+		
+			</form>
+	</div>
+
+</center>>
+
+{% endblock %}
