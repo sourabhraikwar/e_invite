@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<center>
+		<div class="container">
+			<h1>Login</h1>
+			<form method="post" action="">
+				{% csrf_token %}
+				<div class="form-group">
+					{{form.username | add_class:"form-control" | attr:"placeholder:Enter Username"}}
+				</div>
+
+				<div class="form-group">
+					{{form.password | add_class:"form-control" | attr:"placeholder:Enter Password"}}
+				</div>
+
+				<button type="submit" class="btn btn-secondary btn-lg">Login</button>
+			</form><br>
+			<p><a href="{% url 'reset' %}">Forgot password?</a></p>
+		</div>
+	</center>
+
+{% endblock %}

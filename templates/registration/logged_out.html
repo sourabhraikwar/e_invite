@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+	<center>
+		<h1>Logged out successfully!</h1>
+		<a href="{% url  'login' %}">Click here to login again...</a>
+	</center>
+
+{% endblock %}
