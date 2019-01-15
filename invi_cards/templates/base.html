@@ -5,20 +5,45 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<<<<<<< HEAD
 
     <!-- Bootstrap CSS -->
    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
    <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
     <title>Hello, world!</title>
+=======
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>{{title}} | E-Invite</title>
+>>>>>>> 95e19f66841b216605e776625f6bdb43784f678f
   </head>
   <body>
     {% block content %}
     {% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<<<<<<< HEAD
     <script type="text/JavaScript" src="{% static  'js/jquery-3.3.1.min.js'%}"></script>
     <script type="text/JavaScript" src="{% static  'js/bootstrap.min.js'%}"></script>
     <script type="text/JavaScript" src="{% static  'js/all.min.js'%}"></script>
     
       </body>
 </html
+=======
+    <script type="text/JavaScript" src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+    <script type="text/JavaScript" src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script type="text/JavaScript" src="{% static 'js/all.min.js'%}"></script>
+    <script>
+      // $('.invi_card').animateCss('bounce');
+      $(document).ready(()=>{
+        $('.text_2').addClass('animated slideInLeft ');
+        $('.text_1').addClass('animated slideInRight');
+      })
+    </script>
+      </body>
+</html>
+>>>>>>> 95e19f66841b216605e776625f6bdb43784f678f
