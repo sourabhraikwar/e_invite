@@ -15,5 +15,6 @@ def home(request):
 
 frame = 0
 def on_draw(request):
+
     pyglet.image.get_buffer_manager().get_color_buffer().save(str(frame)+'.png')
     return render(request, 'home.html')
