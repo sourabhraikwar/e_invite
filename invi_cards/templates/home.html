@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 {{form.as_p}}
-<div class="card_wr">
+<div id="html-content-holder" class="card_wr">
 	<div class="invi_card">
 		<div class="text_1">Save the date</div>
 		<div class="text_2">James & jane</div>
 	</div>
 </div>
-
+<input id="btn-Preview-Image" class="btn btn-default" type="button" value="Preview"/>
+<a id="btn-Convert-Html2Image" class="btn btn-primary" href="#">Download</a>
+<div id="previewImage" class=" d-none"></div>
 {% endblock%}
