@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pyglet',
-    'invi_cards'
+    'invi_cards',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')]
+
+LOGIN_REDIRECT_URL = '/'
