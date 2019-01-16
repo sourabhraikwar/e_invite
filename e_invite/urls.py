@@ -16,10 +16,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< HEAD
 import django.contrib.auth
+=======
+import django.contrib.auth 
+
+>>>>>>> cd0e2f6d1434a0d90f3cbab716bf8fb6ddd64331
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', include('invi_cards.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd0e2f6d1434a0d90f3cbab716bf8fb6ddd64331
 ]

@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pyglet',
     'invi_cards',
+<<<<<<< HEAD
     'widget_tweaks',
+=======
+    'widget_tweaks'
+>>>>>>> cd0e2f6d1434a0d90f3cbab716bf8fb6ddd64331
 ]
 
 MIDDLEWARE = [
@@ -125,3 +129,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')]
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
