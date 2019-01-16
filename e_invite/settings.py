@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pyglet',
-    'invi_cards'
+    'invi_cards',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
