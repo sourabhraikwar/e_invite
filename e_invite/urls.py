@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+import django.contrib.auth
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('', include('invi_cards.urls'))
+    path('', include('invi_cards.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
