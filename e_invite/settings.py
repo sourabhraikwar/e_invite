@@ -39,7 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pyglet',
     'invi_cards',
+<<<<<<< HEAD
     'widget_tweaks',
+=======
+<<<<<<< HEAD
+    'widget_tweaks',
+=======
+    'widget_tweaks'
+>>>>>>> cd0e2f6d1434a0d90f3cbab716bf8fb6ddd64331
+>>>>>>> 5b80aebf576827e9c2ff9635c18807b2dc448ed7
 ]
 
 MIDDLEWARE = [

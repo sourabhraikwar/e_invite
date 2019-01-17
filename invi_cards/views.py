@@ -2,7 +2,18 @@
 
 from __future__ import unicode_literals
 from django.shortcuts import render
+<<<<<<< HEAD
 from django.http import HttpResponse,HttpResponseRedirect
+=======
+<<<<<<< HEAD
+from django.conf import settings
+from django.http import HttpResponse
+from .forms import *
+
+=======
+from django.http import HttpResponse,HttpResponseRedirect
+>>>>>>> cd0e2f6d1434a0d90f3cbab716bf8fb6ddd64331
+>>>>>>> 5b80aebf576827e9c2ff9635c18807b2dc448ed7
 import pyglet
 from .forms import *
 from .models import *
