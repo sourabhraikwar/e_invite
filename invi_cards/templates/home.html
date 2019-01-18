@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 <div class="card_wr">
 {% block content %}
+ <div>
+<button id="record" class="btn btn-default">StartRecording</button>
+<button id="play" class="btn btn-success">play</button>
+<button id="download" class="btn btn-primary">Download</button>
+</div>
 <div id="html" class="card_wr">
 	<div class="invi_card">
 		<div class="text_1">Save the date</div>
 		<div class="text_2">James & jane</div>
 	</div>
 </div>
-<input id="btn-Preview-Image" class="btn btn-default" type="button" value="Preview"/>
-<a id="btn-Convert-Html2Image" class="btn btn-primary" href="#">Download</a>
+ <video id="recorded" playsinline loop></video>
 <div id="previewImage" class=" d-none"></div>
 {% endblock%}
