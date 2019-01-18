@@ -5,36 +5,16 @@ $(document).ready(()=>{
 })
 
 
-$(document).ready(function(){
+var test = $("#html").get(0);
+var img = new Array();
+html2canvas(test).then(canvas => {
+  return data = canvas.toDataURL()
+}).then(data=>{
+  data_loop(data);
+})
 
-    
-var element = $("#html-content-holder"); // global variable
-var getCanvas; // global variable
- 
-    $(window).on('load',setInterval(function () {
-         html2canvas(element, {
-         onrendered: function (canvas) {
-                getCanvas = canvas;
-                var imgageData = getCanvas.toDataURL("image/png");
-                // Now browser starts downloading it instead of just showing it
-                var newData += imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-             }
-         });
-    },3000);
-    $("#btn-Convert-Html2Image").on('click',(newData)=>{
+function data_loop(data){
+  img[] = data;
+  console.log(img)
+}
 
-        $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
-    })
-});
-
-    var i = 1;                   
-
-    function myLoop () {          
-       setTimeout(function () {   
-          alert('hello');         
-          i++;                
-          if (i < 10) {          
-             myLoop();         
-          }                  
-       }, 3000)
-    }
