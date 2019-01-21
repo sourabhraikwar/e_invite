@@ -7,6 +7,5 @@ urlpatterns = [
 	path('draw', on_draw, name='draw' ),
 	path('reset', reset, name='reset'),
 	path('signup', signup, name='signup'),
-
-
+	path('Invite_Form', I_form, name="Invite_Form"),
 ]

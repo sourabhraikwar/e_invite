@@ -68,3 +68,8 @@ def signup(request):
 	else:
 		form = Signup_form()
 	return render(request, 'registration/signup.html', {'form': form})
+
+def I_form(request):
+	form  = Invite_Form()
+	return render(request, 'invite.html', {'inviteform': form}) 
+	
