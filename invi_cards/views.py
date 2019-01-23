@@ -72,3 +72,12 @@ def signup(request):
 
 def profile(request):
 	return render(request, 'registration/profile.html')
+
+# def my_profile(request):
+# 	return render(request, 'registration/my_profile.html')
+
+def my_profile(request):
+	return render(request, 'registration/new.html')
+
+def card(request):
+	return render(request, 'card.html')

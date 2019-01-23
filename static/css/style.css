@@ -36,3 +36,17 @@ body, html{
 .invi_card .text_2{
 	font-size: 30px;
 }
+
+html,body{
+	padding: 0px;
+	margin: 0px;
+}
+
+canvas{
+	background: #fff;
+}
+
+img{
+	width: 100px;
+	height: 100px;
+}
