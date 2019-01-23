@@ -5,6 +5,9 @@ urlpatterns = [
 	path('', home, name='home_page' ),
     path('E_Form/', Forms, name="E_Form"),
 	path('draw', on_draw, name='draw' ),
-	path('fire', fire, name='fire' ),
-	path('scrap', browser_scrap, name='scrap' ),
+	path('reset', reset, name='reset'),
+	path('signup', signup, name='signup'),
+	path('profile', profile, name='profile'),
+	path('my',my_profile,),
+	path('card', card, name='card' ),
 ]

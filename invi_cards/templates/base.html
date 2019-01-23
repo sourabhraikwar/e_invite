@@ -2,50 +2,54 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
   <!-- Bootstrap CSS -->
-   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <title>{{title}} | E-Invite</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+  <title>{{title}} | E-Invite</title>
   </head>
-  <body>
-    {% block content %}
-    {% endblock %}
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/JavaScript" src="{% static  'js/jquery-3.3.1.min.js'%}"></script>
-    <script type="text/JavaScript" src="{% static  'js/bootstrap.min.js'%}"></script>
-    <script type="text/JavaScript" src="{% static  'js/all.min.js'%}"></script>
-    
-      </body>
-</html
-    <script type="text/JavaScript" src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
-    <script type="text/JavaScript" src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script type="text/JavaScript" src="{% static 'js/all.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/html2canvas.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/canvas2image.js' %}"></script>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#">E-invite</a>
 
-    <!-- ---------------------important script------------------- -->
-    <!-- Teapot code -->
-    <script src="{% static 'js/webgl-utils.js'%}"></script>
-    <script src="{% static 'js/webgl-debug.js'%}"></script>
-    <script src="{% static 'js/matrix4x4.js'%}"></script>
-    <!-- <script src="{% static 'js/cameracontroller.js'%}"></script> -->
-    <!-- <script src="{% static 'js/teapot-streams.js'%}"></script> -->
-    <script src="{% static 'js/demo.js'%}"></script>
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'signup' %}">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'profile' %}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'card' %}">Card</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'logout' %}">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  {% block content %}
+  {% endblock %}
+  <script type="text/JavaScript" src="{% static  'js/jquery-3.3.1.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static  'js/bootstrap.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static  'js/all.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/third_party/graph.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/third_party/streamvisualizer.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/recording.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 
-    <!-- include adapter for srcObject shim -->
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <!-- <script src="{% static 'js/main.js' %}"></script> -->
-    <!-- <script src="{% static 'js/ga.js' %}"></script> -->
-
-    <!-- important script end -->
-
-    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
-    </body>
+  </body>
 </html>

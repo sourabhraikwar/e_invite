@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 from django.shortcuts import render
+from django.http import HttpResponse,HttpResponseRedirect
 from django.conf import settings
 from .forms import *
 from django.http import HttpResponse
-
-from selenium import webdriver
-from PIL import Image
-from io import BytesIO
-
-from selenium.webdriver import Firefox
-from selenium.webdriver.firefox.options import Options
+from .models import *
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 # Create your views here.
 def home(request):
 
@@ -24,50 +22,52 @@ def Forms(request):
 	form = E_Form()
 	return render (request, 'home.html', {'form': form})
 
-frame = 0
-def on_draw(request):
+def reset(request):
+	usr_err=""
+	if request.method == 'POST':
+		form = Login_form(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data['username']
+			
+			try:
+			    u = User.objects.get(username=username)
+			except User.DoesNotExist:
+			    u = None
+			    usr_err = "Username not exist"
+			if u:
+				u.set_password('1234')
+				u.save()
+				return HttpResponseRedirect('/accounts/login/')
+	else:
+		form = Login_form()
 
-    pyglet.image.get_buffer_manager().get_color_buffer().save(str(frame)+'.png')
-    return render(request, 'home.html')
-
-def fire(request):
-
-	opts = Options()
-	opts.set_headless()
-	assert opts.headless  # Operating in headless mode
-	fox = Firefox(options=opts)
-	# fox = webdriver.Firefox(executable_path="/home/webllisto/bin/geckodriver")
-	fox.get('http://localhost:8000')
-	# now that we have the preliminary stuff out of the way time to get that image :D
-	element = fox.find_element_by_id('html') # find part of the page you want image of
-	location = element.location
-	size = element.size
-	png = fox.get_screenshot_as_png() # saves screenshot of entire page
-	fox.quit()
-
-	im = Image.open(BytesIO(png)) # uses PIL library to open image in memory
-
-	left = location['x']
-	top = location['y']
-	right = location['x'] + size['width']
-	bottom = location['y'] + size['height']
+	context = {
+		'form':form,
+		'usr_err': usr_err,
+	}
+	return render(request, 'registration/password_reset_form.html', context)
 
 
-	im = im.crop((left, top, right, bottom)) # defines crop points
-	print(im)
-	im.save('screenshot.png') # saves new cropped image
-	return HttpResponse('task complited')
 
-def browser_scrap(request):
-	opts = Options()
-	opts.set_headless()
-	assert opts.headless  # Operating in headless mode
-	browser = Firefox(options=opts)
-	browser.get('https://duckduckgo.com')
-	search_form = browser.find_element_by_id('search_form_input_homepage')
-	search_form.send_keys('real python')
-	search_form.submit()
-	results = browser.find_elements_by_class_name('result')
-	browser.close()
-	quit()
-	return render(request, 'duck_scrap.html')
+def signup(request):
+	if request.method == 'POST':
+		form = Signup_form(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/accounts/login/')
+	else:
+		form = Signup_form()
+	return render(request, 'registration/signup.html', {'form': form})
+
+
+def profile(request):
+	return render(request, 'registration/profile.html')
+
+# def my_profile(request):
+# 	return render(request, 'registration/my_profile.html')
+
+def my_profile(request):
+	return render(request, 'registration/new.html')
+
+def card(request):
+	return render(request, 'card.html')
