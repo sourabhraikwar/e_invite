@@ -2,33 +2,54 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <title>{{title}} | E-Invite</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+  <title>{{title}} | E-Invite</title>
   </head>
-  <body>
-    {% block content %}
-    {% endblock %}
-    <!-- Optional JavaScript -->
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#">E-invite</a>
 
-    <script type="text/JavaScript" src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
-    <script type="text/JavaScript" src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script type="text/JavaScript" src="{% static 'js/all.min.js'%}"></script>
-    <script>
-      // $('.invi_card').animateCss('bounce');
-      $(document).ready(()=>{
-        $('.text_2').addClass('animated slideInLeft ');
-        $('.text_1').addClass('animated slideInRight');
-      })
-    </script>
-      </body>
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'signup' %}">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'profile' %}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'card' %}">Card</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'logout' %}">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  {% block content %}
+  {% endblock %}
+  <script type="text/JavaScript" src="{% static  'js/jquery-3.3.1.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static  'js/bootstrap.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static  'js/all.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/third_party/graph.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/third_party/streamvisualizer.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/recording.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+  </body>
 </html>
-<!-- all working good -->
