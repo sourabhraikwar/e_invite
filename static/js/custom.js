@@ -1,3 +1,15 @@
+// datatable js start here
+
+$(document).ready( function () {
+    $('.myTable').DataTable();
+} );
+
+// datatable js end here
+
+
+
+
+
 let c = document.getElementById('animation');
 let ctx = c.getContext('2d');
 let x = 0, count=100, i;

@@ -8,7 +8,7 @@ body, html{
 
 body{
 	position: relative;
-	padding-bottom: 200px;
+	padding-bottom: 195px;
 }
 
 canvas{
@@ -66,7 +66,7 @@ footer.bg-dark.footer-wr {
 }
 
 .footer-second{
-	background-color: #171515;
+	background-color: #181b1f;
 }
 
 .footer-second a {
@@ -75,4 +75,40 @@ footer.bg-dark.footer-wr {
 	text-align: center;
 	display: inline-block;
 	width: 100%;
+}
+
+
+/*dashboard css start from here*/
+.sidebar_wr{
+	background-color: #009688;
+	margin: 1px 0 0 0;
+	min-height: 90vh;
+}
+
+.sidebar_wr ul{
+	margin: 0px;
+	padding: 0px;
+}
+
+.sidebar_wr li {
+	list-style: none;
+	background-color: #00796B;
+	margin: 1.5px 0;
+}
+
+.sidebar_wr li a{
+	padding: 15px;
+	color: gainsboro;
+	font-weight: 500;
+	text-decoration: none;
+	display: block;
+}
+
+/*dashboard css start from here*/
+.dash_title {
+	font-size: 20px;
+	padding: 15px;
+	background-color: #fff;
+	margin: 2px 0 15px 0;
+
 }

@@ -28,16 +28,22 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="{% url 'home' %}">Home </a>
                   </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'aboutus' %}">Aboutus </a>
-                  </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'contactus' %}">Contactus </a>
-                  </li>
                   {% if user.is_authenticated %}
                   <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                  </li>  
+                    <a class="nav-link" href="#"><i class="mx-2 fas fa-bell"></i></a>
+                  </li>
+                  
+                  <li class="nav-item dropdown active">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="mx-1 fas fa-user-circle"></i> {{user.username}}
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                          </div>
+                        </li>
                   {% else %}
                   <li class="nav-item active">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -51,9 +57,33 @@
             </nav>
         </div>
     </header>
-    {% block content %}
-
-    {% endblock %}
+    <div class="container-fluid dashboard_wr">
+      <div class="row">
+        <div class="col-2 p-0">
+          <div class="sidebar_wr">
+            <ul>
+              <li>
+                <a href="{% url 'dashboard' %}"> <i class="mx-2 fas fa-tachometer-alt"></i> Dashboard</a>
+              </li>
+              <li>
+                <a href="{% url 'userslist' %}"><i class="mx-2 fas fa-users"></i> Users</a>
+              </li>
+              <li>
+                <a href="{% url 'cardslist' %}"> <i class="mx-2 fas fa-cubes"></i> Cards</a>
+              </li>
+              <li>
+                <a href="{% url 'settings' %}"> <i class="mx-2 fas fa-cog"></i> Settings</a>
+              </li>
+            </ul>
+          </div>
+        </div>    
+        <div class="col-10 p-0">
+        <h1 class="dash_title">{{title}}</h1>
+        {% block dash_content %}
+        {% endblock %}
+        </div>
+      </div>
+    </div>
     <footer class="bg-dark footer-wr">
         <div class="footer-first">
             <div class="container text-center">
@@ -83,9 +113,9 @@
         </div>
     </footer>
 
-  <script type="text/JavaScript" src="{% static  'js/jquery-3.3.1.min.js'%}"></script>
-  <script type="text/JavaScript" src="{% static  'js/bootstrap.min.js'%}"></script>
-  <script type="text/JavaScript" src="{% static  'js/all.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static 'js/bootstrap.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static 'js/all.min.js'%}"></script>
   <script type="text/javascript" src="{% static 'js/third_party/graph.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/third_party/streamvisualizer.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/recording.js' %}"></script>

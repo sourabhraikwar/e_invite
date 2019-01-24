@@ -13,19 +13,19 @@ def home(request):
 	context = {
 		'title': 'Home'
 	}
-	return render(request, 'home.html', context)
+	return render(request, 'invi_cards/home.html', context)
 
 def aboutUs(request):
 	context = {
 		'title': 'Aboutus'
 	}
-	return render(request, 'About.html', context)
+	return render(request, 'invi_cards/About.html', context)
 
 def contactUs(request):
 	context = {
 		'title': 'Contatus'
 	}
-	return render(request, 'Contact.html', context)
+	return render(request, 'invi_cards/Contact.html', context)
 
 
 def reset(request):
@@ -66,4 +66,4 @@ def signup(request):
 	return render(request, 'registration/signup.html', {'form': form})
 
 def card(request):
-	return render(request, 'card.html')
+	return render(request, 'invi_cards/card.html')
