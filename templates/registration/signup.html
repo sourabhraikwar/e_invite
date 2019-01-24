@@ -1,40 +1,43 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-
-	<center>
+	<div class="signup_form_wr">
 		<div class="container">
-			<h1>Signup form</h1>
-			<form method="post" action="" enctype="multipart/form-data">
-				{% csrf_token %}
-				<div class="form-group">
-					{{form.username | add_class:"form-control" | attr:"placeholder:Enter Username"}}
-				</div>
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					
+					<h1 class="text-center my-5">Signup</h1>
+					<form method="post" action="" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							{{form.username | add_class:"form-control" | attr:"placeholder:Enter Username"}}
+						</div>
 
-				<div class="form-group">
-					{{form.first_name | add_class:"form-control" | attr:"placeholder:Enter First name"}}
-				</div>
+						<div class="form-group">
+							{{form.first_name | add_class:"form-control" | attr:"placeholder:Enter First name"}}
+						</div>
 
-				<div class="form-group">
-					{{form.last_name | add_class:"form-control" | attr:"placeholder:Enter Last name"}}
-				</div>
+						<div class="form-group">
+							{{form.last_name | add_class:"form-control" | attr:"placeholder:Enter Last name"}}
+						</div>
 
-				<div class="form-group">
-					{{form.email | add_class:"form-control" | attr:"placeholder:Enter Email address"}}
-				</div>
+						<div class="form-group">
+							{{form.email | add_class:"form-control" | attr:"placeholder:Enter Email address"}}
+						</div>
 
-				<div class="form-group">
-					{{form.password1 | add_class:"form-control" | attr:"placeholder:Enter Password"}}
-				</div>
+						<div class="form-group">
+							{{form.password1 | add_class:"form-control" | attr:"placeholder:Enter Password"}}
+						</div>
 
-				<div class="form-group">
-					{{form.password2 | add_class:"form-control" | attr:"placeholder:Confirm password"}}
-				</div>
+						<div class="form-group">
+							{{form.password2 | add_class:"form-control" | attr:"placeholder:Confirm password"}}
+						</div>
+						<input type="submit" class="btn btn-secondary btn-lg" value="Signup" />
+						<a class="float-right mt-3" href="{% url 'login' %}">Already registered please login here</a>
 
-					<button type="submit" class="btn btn-secondary btn-lg">Signup</button>
-			</form><br>
-			<p><a href="{% url 'login' %}">Already registered please login here</a></p>
+					</form>
+				</div>	
+			</div>
 		</div>
-	</center>
-
+	</div>
 {% endblock %}

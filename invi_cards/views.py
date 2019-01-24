@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
@@ -10,17 +8,25 @@ from .models import *
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 # Create your views here.
-def home(request):
 
+def home(request):
 	context = {
 		'title': 'Home'
 	}
-
 	return render(request, 'home.html', context)
 
-def Forms(request):
-	form = E_Form()
-	return render (request, 'home.html', {'form': form})
+def aboutUs(request):
+	context = {
+		'title': 'Aboutus'
+	}
+	return render(request, 'About.html', context)
+
+def contactUs(request):
+	context = {
+		'title': 'Contatus'
+	}
+	return render(request, 'Contact.html', context)
+
 
 def reset(request):
 	usr_err=""
@@ -58,16 +64,6 @@ def signup(request):
 	else:
 		form = Signup_form()
 	return render(request, 'registration/signup.html', {'form': form})
-
-
-def profile(request):
-	return render(request, 'registration/profile.html')
-
-# def my_profile(request):
-# 	return render(request, 'registration/my_profile.html')
-
-def my_profile(request):
-	return render(request, 'registration/new.html')
 
 def card(request):
 	return render(request, 'card.html')
