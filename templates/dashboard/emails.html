@@ -1,4 +1,40 @@
 {% extends 'dashboard-base.html' %}
-
+{% load widget_tweaks %}
 {% block dash_content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+					<div class="card-title border-bottom">Send Mail</div>
+					<form method="post" action="" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							<div class="row">
+								<div class="col">
+									{{ send_data.to|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Enter Reciver Address" }}		
+								</div>
+							</div>	
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col">
+									{{ send_data.subject|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Enter Subject" }}		
+								</div>
+							</div>	
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col">
+									{{ send_data.message|attr:"type: email"|add_class:"form-control"|attr:"cols:4"|attr:"rows:4" }}		
+								</div>
+							</div>	
+						</div>
+						<input type="submit" class="btn btn-primary" value="Send">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

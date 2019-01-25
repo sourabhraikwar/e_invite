@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -38,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'invi_cards',
+    'dashboard',
     'widget_tweaks',
 ]
 
@@ -129,5 +129,8 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')]
 LOGIN_REDIRECT_URL = 'dashborad'
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+# smptp setup
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_USE_TLS ='True'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465

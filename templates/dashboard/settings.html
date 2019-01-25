@@ -4,24 +4,72 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-6">
 			<div class="card">
 				<div class="card-body">
-					<form>
-					  <div class="row">
-					    <div class="col">
-					      <input type="text" class="form-control" placeholder="First name">
-					    </div>
-					  </div>
-					  <div class="row">
-					    <div class="col">
-					      <input type="text" class="form-control" placeholder="Last name">
-					    </div>
-					  </div>
-					</form>
+					<div class="card-title border-bottom mb-3">SMTP Mails 
+					<span class="float-right"><i class="fas fa-plus-circle"  data-toggle="modal" data-target="#add_mail" ></i></span></div>
+					<table class="table table-striped table-bordered myTable">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Edit</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">1</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					    </tr>
+					  </tbody>
+					</table>
 				</div>
 			</div>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="add_mail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+				<div class="card shadow">
+					<div class="card-body">
+					<div class="card-title mb-3 border-bottom">SMTP host setup</div>
+					<form method="post" action="" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							<div class="row">
+								<div class="col">
+								{{ smtp_form.email|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Enter Email Address" }}
+								</div>
+							</div>
+						</div>
+						<div class="form-group">  
+							<div class="row">
+								<div class="col">
+								{{ smtp_form.password|add_class:"form-control"|attr:"placeholder:Enter password" }}
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="hidden" name="status" id="id_status" value="0">
+							<input type="submit" class="btn btn-primary" value="submit"/>
+						</div>
+					</form>
+					</div>
+				</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 	</div>
 </div>
 
