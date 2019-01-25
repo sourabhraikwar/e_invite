@@ -33,6 +33,7 @@ def emails(request):
 
 def settings(request):
 
+	
 	context = {
 		'title': 'Settings'
 	}
