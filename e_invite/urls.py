@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', include('invi_cards.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('dashboard', include('dashboard.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
