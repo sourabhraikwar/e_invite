@@ -1,5 +1,21 @@
 {% extends 'dashboard-base.html' %}
 
 {% block dash_content %}
-{{user.username}}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="card user_profile shadow">
+				<div class="card-body">
+					<ul>
+						<li><strong class="mx-2">Username: </strong> {{user.username}}</li>
+						<li><strong class="mx-2">Firstname: </strong>{{user.firstname}}</li>
+						<li><strong class="mx-2">Lastname: </strong>{{user.lastname}}</li>
+						<li><strong class="mx-2">Emailid: </strong>{{user.emailid}}</li>
+						<li><strong class="mx-2">Mobile: </strong>{{user.mobile}}</li>
+					</ul>
+				</div>
+			</div>			
+		</div>	
+	</div>
+</div>
 {% endblock %}

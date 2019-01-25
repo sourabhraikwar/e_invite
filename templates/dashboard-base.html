@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
@@ -72,6 +73,9 @@
                 <a href="{% url 'cardslist' %}"> <i class="mx-2 fas fa-cubes"></i> Cards</a>
               </li>
               <li>
+                <a href="{% url 'emails' %}"> <i class="mx-2 fas fa-envelope"></i> Emails</a>
+              </li>
+              <li>
                 <a href="{% url 'settings' %}"> <i class="mx-2 fas fa-cog"></i> Settings</a>
               </li>
             </ul>
@@ -114,12 +118,14 @@
     </footer>
 
   <script type="text/JavaScript" src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static 'js/jquery.dataTables.min.js'%}"></script>
+  <script type="text/JavaScript" src="{% static 'js/dataTables.bootstrap4.min.js'%}"></script>
   <script type="text/JavaScript" src="{% static 'js/bootstrap.min.js'%}"></script>
   <script type="text/JavaScript" src="{% static 'js/all.min.js'%}"></script>
   <script type="text/javascript" src="{% static 'js/third_party/graph.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/third_party/streamvisualizer.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/recording.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+   <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 
   </body>
 </html>

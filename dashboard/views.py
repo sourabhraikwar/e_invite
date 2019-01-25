@@ -24,6 +24,13 @@ def cardsList(request):
 	}
 	return render(request, 'dashboard/cards-list.html', context)
 
+def emails(request):
+
+	context = {
+		'title': 'Cards List'
+	}
+	return render(request, 'dashboard/emails.html', context)
+
 def settings(request):
 
 	context = {

@@ -1,6 +1,6 @@
 
 body, html{
-	background: #e6e6e6;
+	background: #e5e5e5;
 	width: 100%;
 	min-height: 100vh;
 	font-family: 'Roboto', sans-serif;
@@ -108,7 +108,43 @@ footer.bg-dark.footer-wr {
 .dash_title {
 	font-size: 20px;
 	padding: 15px;
-	background-color: #fff;
+	background-color: #ffffff;
 	margin: 2px 0 15px 0;
 
 }
+
+.dash_card {
+    color: #000;
+    background: #fff;
+    padding: 15px;
+}
+
+.dash_card p{
+	font-size: 25px;
+	max-width: 40%;
+	display: inline-block;
+	vertical-align: top;
+	line-height: 20px;
+	margin: 10px 10px 5px 10px;
+	padding: 0 10px;
+}
+
+.dash_card p span{
+	display: block;
+	font-size: 14px;
+	color: grey;
+}
+
+/*profile page css here*/
+
+.user_profile ul{
+	margin: 0px;
+	padding: 0px;
+
+}
+
+.user_profile ul li{
+	list-style: none;
+	padding: 15px;
+}
+
