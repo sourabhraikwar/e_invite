@@ -14,3 +14,8 @@ class SendMailForm(forms.ModelForm):
 	class Meta:
 		model = sendEmails
 		fields = '__all__'
+
+class CardForm(forms.ModelForm):
+	class Meta:
+		model = addCards
+		fields = '__all__'

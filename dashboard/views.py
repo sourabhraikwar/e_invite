@@ -21,9 +21,19 @@ def usersList(request):
 	return render(request, 'dashboard/users-list.html', context)
 
 def cardsList(request):
+	cardform = CardForm()
+	if request.method == 'POST':
+		cardform = CardForm(request.POST, request.FILES)
+		if cardform.is_valid():
+			cardform.save()
+			# return HttpResponse('Card Saved Successfully')
 
+			# cards = addCards.objects.all()
+		
 	context = {
-		'title': 'Cards List'
+		'title': 'Cards List',
+		'cardform': cardform,
+		# 'cards':cards,
 	}
 	return render(request, 'dashboard/cards-list.html', context)
 
