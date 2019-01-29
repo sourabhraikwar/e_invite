@@ -39,7 +39,7 @@
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                           </div>
@@ -76,13 +76,11 @@
             </div>
         </div>
         <div class="footer-second text-center">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
+                        <a href="#">Privacy Policies</a>
                         <a href="#">Terms and Conditions</a>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="#">Privacy Policy</a>
                     </div>
                 </div>
             </div>

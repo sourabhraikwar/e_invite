@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'invi_cards',
     'dashboard',
     'widget_tweaks',
+    'django_wysiwyg',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +136,10 @@ EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_USE_TLS ='True'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
+
+# wysiwyg editor settings
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+
+#ckeditor base path
+CKEDITOR_BASEPATH = "/staticfiles/ckeditor/ckeditor/"
+DJANGO_WYSIWYG_MEDIA_URL = "/staticfiles/ckeditor/ckeditor/"

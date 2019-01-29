@@ -58,6 +58,7 @@ def emails(request):
 
 def settings(request):
 
+	smtp_active_mail = Email_model.objects.filter(status=1)
 	email_form = Email_form()
 
 	if request.method == 'POST':
@@ -65,19 +66,28 @@ def settings(request):
 		email_form = Email_form(request.POST)
 		print(email_form)
 		if email_form.is_valid():
-			email_form.save()
-			return HttpResponse('Form saved successfully')
+			email = email_form.cleaned_data['email']
+			password = email_form.cleaned_data['password']
+			smtp_active_mail.update(email=email, password=password, status=1)
 
 	context = {
 		'title': 'Settings',
 		'smtp_form': email_form,
+		'smtp_active_mail': smtp_active_mail
 	}
 
 	return render(request, 'dashboard/settings.html', context)
-
+	
 def profile(request):
 
 	context = {
 		'title': 'Profile'
 	}
 	return render(request, 'dashboard/profile.html', context)
+
+
+def editor(request):
+	context ={
+	
+	}
+	return render(request, 'dashboard/editor.html', context)

@@ -4,7 +4,7 @@ from django.db import models
 class Email_model(models.Model):
 	email = models.EmailField()
 	password = models.CharField(max_length=30)	
-	status = models.CharField(max_length=2, default="0")
+	status = models.CharField(max_length=2, default=1)
 
 class sendEmails(models.Model):
 	to = models.EmailField()
