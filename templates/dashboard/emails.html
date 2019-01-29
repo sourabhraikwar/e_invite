@@ -3,7 +3,7 @@
 {% block dash_content %}
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 d-none">
 			<div class="card">
 				<div class="card-body">
 					<div class="card-title border-bottom">Send Mail</div>
@@ -35,6 +35,36 @@
 				</div>
 			</div>
 		</div>
+
+
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="card-title border-bottom mb-3">List Of Mails 
+					<span class="float-right"><i class="fas fa-plus-circle"  data-toggle="modal" data-target="#add_mail" ></i></span></div>
+					<table class="table table-striped table-bordered myTable">
+					  <thead>
+					    <tr>
+					      <th scope="col">Nos</th>
+					      <th scope="col">Senders</th>
+					      <th scope="col">Subjects</th>
+					    </tr>
+					  </thead>
+					  {% for x in data %}
+					  <tbody>
+					    <tr>
+					      <th scope="row">{{x.id}}</th>
+					      <td>{{x.to}}</td>
+					      <td>{{x.subject}}</td>
+					    </tr>
+					  </tbody>
+					  {% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 </div>
 {% endblock %}

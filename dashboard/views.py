@@ -50,9 +50,14 @@ def emails(request):
 				send_data.save()
 				return HttpResponse('mail send successfully')
 
+
+	data = sendEmails.objects.all()
+
 	context = {
 		'title': 'Email',
 		'send_data': send_data,
+		'data': data,
+
 	}
 	return render(request, 'dashboard/emails.html', context)
 
@@ -81,3 +86,9 @@ def profile(request):
 		'title': 'Profile'
 	}
 	return render(request, 'dashboard/profile.html', context)
+
+
+# def show_mail(request):
+# 	data = sendEmails.objects.all()
+# 	return render(request, 'dashboard/emails.html', {'data':data})
+
