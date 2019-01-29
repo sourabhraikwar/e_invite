@@ -9,4 +9,5 @@ urlpatterns = [
 	path('settings', settings, name='settings'),
 	path('profile', profile, name='profile'),
 	path('editor', editor, name='editor'),
+	path('card', cards, name='cards'),
 ]

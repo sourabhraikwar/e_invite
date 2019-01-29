@@ -91,3 +91,9 @@ def editor(request):
 	
 	}
 	return render(request, 'dashboard/editor.html', context)
+
+def cards(request):
+	context ={
+	
+	}
+	return render(request, 'invi_cards/card.html', context)	

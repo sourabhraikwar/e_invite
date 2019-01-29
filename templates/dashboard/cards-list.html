@@ -1,4 +1,18 @@
 {% extends 'dashboard-base.html' %}
+{% load static %}
 
 {% block dash_content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4 p-4">
+			<img src="{% static 'images/wedding_card.png' %}" class="img-fluid card_view">
+		</div>
+		<div class="col-md-4 p-4">
+			<img src="{% static 'images/wedding_card.png' %}" class="img-fluid card_view">
+		</div>
+		<div class="col-md-4 p-4">
+			<img src="{% static 'images/wedding_card.png' %}" class="img-fluid card_view">
+		</div>
+	</div>
+</div>
 {% endblock %}

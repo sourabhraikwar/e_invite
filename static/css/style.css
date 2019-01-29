@@ -133,6 +133,13 @@ footer.bg-dark.footer-wr {
 	color: grey;
 }
 
+.card_view{
+	transition: 0.5s;
+}
+
+.card_view:hover{
+	transform: scale(1.05);
+}
 /*profile page css here*/
 
 .user_profile ul{
