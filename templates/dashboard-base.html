@@ -82,7 +82,7 @@
           </div>
         </div>    
         <div class="col-10 p-0">
-        <h1 class="dash_title">{{title}}</h1>
+        <h1 class="dash_title">{{title}} {% block title_content %}{% endblock %}</h1>
         {% block dash_content %}
         {% endblock %}
         </div>
@@ -125,7 +125,9 @@
   <script type="text/javascript" src="{% static 'js/third_party/graph.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/third_party/streamvisualizer.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/recording.js' %}"></script>
-   <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
-
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/tab.js' %}"></script>
+  {% block extra_script %}
+  {% endblock %}
   </body>
 </html>

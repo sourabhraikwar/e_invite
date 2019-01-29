@@ -8,6 +8,6 @@ urlpatterns = [
 	path('emails', emails, name='emails'),
 	path('settings', settings, name='settings'),
 	path('profile', profile, name='profile'),
+	path('edit_card', editCard, name='edit_card'),
 	path('editor', editor, name='editor'),
-	path('card', cards, name='cards'),
 ]

@@ -21,11 +21,33 @@ def usersList(request):
 	return render(request, 'dashboard/users-list.html', context)
 
 def cardsList(request):
+	cards_data = addCards.objects.all()
+	cardform = CardForm()
+	if request.method == 'POST':
+		cardform = CardForm(request.POST, request.FILES)
+		if cardform.is_valid():
+			cardform.save()
+			# return HttpResponse('Card Saved Successfully')
 
+		
 	context = {
-		'title': 'Cards List'
+		'title': 'Cards List',
+		'cardform': cardform,
+		'cards_data': cards_data
+		# 'cards':cards,
 	}
 	return render(request, 'dashboard/cards-list.html', context)
+
+def editCard(request):
+	card_data = addCards.objects.all()
+	context = {
+		'title': 'Edit Card',
+		'card_data': card_data
+	}
+	for d in card_data:
+		print(d.file)
+
+	return render(request, 'dashboard/edit-card.html', context)	
 
 def emails(request):
 	send_data = SendMailForm()
@@ -50,9 +72,14 @@ def emails(request):
 				send_data.save()
 				return HttpResponse('mail send successfully')
 
+
+	data = sendEmails.objects.all()
+
 	context = {
 		'title': 'Email',
 		'send_data': send_data,
+		'data': data,
+
 	}
 	return render(request, 'dashboard/emails.html', context)
 
@@ -85,15 +112,14 @@ def profile(request):
 	}
 	return render(request, 'dashboard/profile.html', context)
 
-
 def editor(request):
 	context ={
 	
 	}
 	return render(request, 'dashboard/editor.html', context)
 
-def cards(request):
-	context ={
+# def cards(request):
+# 	context ={
 	
-	}
-	return render(request, 'invi_cards/card.html', context)	
+# 	}
+# 	return render(request, 'invi_cards/card.html', context)	

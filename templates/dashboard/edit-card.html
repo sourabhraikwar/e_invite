@@ -1,0 +1,17 @@
+{% extends 'dashboard-base.html' %}
+
+{% block dash-content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<canvas id="canvas" ></canvas>		
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+	{% for x in card_data %}
+	<script type="text/javascript" src="{{ x.file }}"></script>
+	{% endfor %}
+{% endblock %}

@@ -14,3 +14,9 @@ class SendMailForm(forms.ModelForm):
 	class Meta:
 		model = sendEmails
 		fields = '__all__'
+
+class CardForm(forms.ModelForm):
+	file = forms.FileField(label='Add file')
+	class Meta:
+		model = addCards
+		fields = '__all__'
