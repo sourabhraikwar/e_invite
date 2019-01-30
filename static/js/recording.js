@@ -45,9 +45,9 @@ function toggleRecording() {
     startRecording();
   } else {
     stopRecording();
+    downloadButton.disabled = false;
     // recordButton.textContent = 'Start Recording';
     // playButton.disabled = false;
-    downloadButton.disabled = false;
   }
 }
 
@@ -79,7 +79,7 @@ function startRecording() {
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
   // recordButton.textContent = 'Stop Recording';
   // playButton.disabled = true;
-  // downloadButton.disabled = true;
+  downloadButton.disabled = true;
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start(100); // collect 100ms of data
