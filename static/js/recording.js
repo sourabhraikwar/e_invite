@@ -7,11 +7,11 @@ let sourceBuffer;
 const canvas = document.querySelector('canvas#animation');
 // const video = document.querySelector('video');
 
-const recordButton = document.querySelector('button#record');
-const stopButton = document.querySelector('button#stop');
+// const recordButton = document.querySelector('button#record');
+// const stopButton = document.querySelector('button#stop');
 // // const playButton = document.querySelector('button#play');
 const downloadButton = document.querySelector('button#download');
-recordButton.onclick = toggleRecording;
+// recordButton.onclick = toggleRecording;
 // // playButton.onclick = play;
 downloadButton.onclick = download;
 
@@ -45,7 +45,7 @@ function toggleRecording() {
     startRecording();
   } else {
     stopRecording();
-    recordButton.textContent = 'Start Recording';
+    // recordButton.textContent = 'Start Recording';
     // playButton.disabled = false;
     downloadButton.disabled = false;
   }
@@ -77,7 +77,7 @@ function startRecording() {
     }
   }
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
-  recordButton.textContent = 'Stop Recording';
+  // recordButton.textContent = 'Stop Recording';
   // playButton.disabled = true;
   // downloadButton.disabled = true;
   mediaRecorder.onstop = handleStop;

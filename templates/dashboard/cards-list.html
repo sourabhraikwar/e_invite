@@ -53,7 +53,7 @@
 				{% for x in cards_data %}
 				<div class="col-md-4 p-4">
 					<a href="{% url 'edit_card' %}">
-						<img src="{{x.image}}" class="img-fluid card_view pointer">
+						<img src="{{x.image.url}}" class="img-fluid card_view pointer">
 					</a>
 				</div>
 				{% endfor %}

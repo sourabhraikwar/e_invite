@@ -128,6 +128,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')]
 
+# media files directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 LOGIN_REDIRECT_URL = 'dashborad'
 LOGIN_REDIRECT_URL = '/'
 

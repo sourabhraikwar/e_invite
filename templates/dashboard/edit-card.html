@@ -1,10 +1,34 @@
 {% extends 'dashboard-base.html' %}
-
-{% block dash-content %}
+{% block title_content %}
+<span class="float-right">	
+	<button id="play" class="btn btn-sm btn-info"><i class="mx-2 fas fa-play"></i>Play</button>		
+	<button id="start" class="btn btn-sm btn-primary"><i class="mx-2 fas fa-video"></i>Start-recording</button>		
+	<button id="download" class="btn btn-sm btn-danger"><i class="mx-2 fas fa-download"></i>Download</button>
+</span>		
+{% endblock %}
+{% block dash_content %}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6">
-			<canvas id="canvas" ></canvas>		
+			<canvas id="animation" width="600" height="600" ></canvas>
+		</div>
+		<div class="col-md-6">
+			<form>
+				<div class="form-group">
+					<div class="row">
+						<div class="col">
+							<input type="text" name="first_line" class="form-control" value="save the date" placeholder="save the date" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col">
+							<input type="text" name="first_line" class="form-control" value="save the date" placeholder="save the date" />
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -12,6 +36,6 @@
 
 {% block extra_script %}
 	{% for x in card_data %}
-	<script type="text/javascript" src="{{ x.file }}"></script>
+	<script type="text/javascript" src="{{ x.file.url }}"></script>
 	{% endfor %}
 {% endblock %}

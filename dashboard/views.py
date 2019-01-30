@@ -45,7 +45,7 @@ def editCard(request):
 		'card_data': card_data
 	}
 	for d in card_data:
-		print(d.file)
+		print(d.file.url)
 
 	return render(request, 'dashboard/edit-card.html', context)	
 

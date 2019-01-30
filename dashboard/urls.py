@@ -11,3 +11,4 @@ urlpatterns = [
 	path('edit_card', editCard, name='edit_card'),
 	path('editor', editor, name='editor'),
 ]
+
