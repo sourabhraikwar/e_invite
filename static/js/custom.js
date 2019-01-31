@@ -6,5 +6,10 @@ $(document).ready( function () {
 
 // datatable js end here
 
+$(document).ready(function(){
+  $("#cards").click(function(){
+    $("#cards_list").slideToggle();
+  });
+});
 
 
