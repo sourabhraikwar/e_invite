@@ -44,6 +44,7 @@ def weddingCardsList(request):
 	if request.method == 'POST':
 		cardform = CardForm(request.POST, request.FILES)
 		if cardform.is_valid():
+			cardform.category = "Wedding Cards"
 			cardform.save()
 			# return HttpResponse('Card Saved Successfully')
 
@@ -62,6 +63,7 @@ def birthdayCardsList(request):
 	if request.method == 'POST':
 		cardform = CardForm(request.POST, request.FILES)
 		if cardform.is_valid():
+			cardform.category = "Birthday Cards"
 			cardform.save()
 			# return HttpResponse('Card Saved Successfully')
 
@@ -80,6 +82,7 @@ def inaugurationcardsList(request):
 	if request.method == 'POST':
 		cardform = CardForm(request.POST, request.FILES)
 		if cardform.is_valid():
+			cardform.category = "Inauguration Cards"
 			cardform.save()
 			# return HttpResponse('Card Saved Successfully')
 
