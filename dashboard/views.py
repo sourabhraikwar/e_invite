@@ -38,6 +38,60 @@ def cardsList(request):
 	}
 	return render(request, 'dashboard/cards-list.html', context)
 
+def weddingCardsList(request):
+	cards_data = addCards.objects.all()
+	cardform = CardForm()
+	if request.method == 'POST':
+		cardform = CardForm(request.POST, request.FILES)
+		if cardform.is_valid():
+			cardform.save()
+			# return HttpResponse('Card Saved Successfully')
+
+		
+	context = {
+		'title': 'Wedding Cards',
+		'cardform': cardform,
+		'cards_data': cards_data
+		# 'cards':cards,
+	}
+	return render(request, 'dashboard/cards/wedding_cards.html', context)
+
+def birthdayCardsList(request):
+	cards_data = addCards.objects.all()
+	cardform = CardForm()
+	if request.method == 'POST':
+		cardform = CardForm(request.POST, request.FILES)
+		if cardform.is_valid():
+			cardform.save()
+			# return HttpResponse('Card Saved Successfully')
+
+		
+	context = {
+		'title': 'Birthday Cards',
+		'cardform': cardform,
+		'cards_data': cards_data
+		# 'cards':cards,
+	}
+	return render(request, 'dashboard/cards/birthday_cards.html', context)
+
+def inaugurationcardsList(request):
+	cards_data = addCards.objects.all()
+	cardform = CardForm()
+	if request.method == 'POST':
+		cardform = CardForm(request.POST, request.FILES)
+		if cardform.is_valid():
+			cardform.save()
+			# return HttpResponse('Card Saved Successfully')
+
+		
+	context = {
+		'title': 'Inauguration Cards',
+		'cardform': cardform,
+		'cards_data': cards_data
+		# 'cards':cards,
+	}
+	return render(request, 'dashboard/cards/inauguration_cards.html', context)
+
 def editCard(request):
 	card_data = addCards.objects.all()
 	context = {
