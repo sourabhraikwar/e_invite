@@ -39,12 +39,12 @@ def cardsList(request):
 	return render(request, 'dashboard/cards-list.html', context)
 
 def weddingCardsList(request):
-	cards_data = addCards.objects.all()
+	cat_wedding ='wedding'
+	cards_data = addCards.objects.filter(category=cat_wedding)
 	cardform = CardForm()
 	if request.method == 'POST':
 		cardform = CardForm(request.POST, request.FILES)
 		if cardform.is_valid():
-			cardform.category = "Wedding Cards"
 			cardform.save()
 			# return HttpResponse('Card Saved Successfully')
 
@@ -58,12 +58,12 @@ def weddingCardsList(request):
 	return render(request, 'dashboard/cards/wedding_cards.html', context)
 
 def birthdayCardsList(request):
-	cards_data = addCards.objects.all()
+	cat_birth = "birthday"
+	cards_data = addCards.objects.filter(category=cat_birth)
 	cardform = CardForm()
 	if request.method == 'POST':
 		cardform = CardForm(request.POST, request.FILES)
 		if cardform.is_valid():
-			cardform.category = "Birthday Cards"
 			cardform.save()
 			# return HttpResponse('Card Saved Successfully')
 
@@ -77,12 +77,12 @@ def birthdayCardsList(request):
 	return render(request, 'dashboard/cards/birthday_cards.html', context)
 
 def inaugurationcardsList(request):
-	cards_data = addCards.objects.all()
+	cat_inaug = "inauguration"
+	cards_data = addCards.objects.filter(category=cat_inaug)
 	cardform = CardForm()
 	if request.method == 'POST':
 		cardform = CardForm(request.POST, request.FILES)
 		if cardform.is_valid():
-			cardform.category = "Inauguration Cards"
 			cardform.save()
 			# return HttpResponse('Card Saved Successfully')
 
@@ -95,15 +95,12 @@ def inaugurationcardsList(request):
 	}
 	return render(request, 'dashboard/cards/inauguration_cards.html', context)
 
-def editCard(request):
-	card_data = addCards.objects.all()
+def editCard(request, id):
+	card_data = addCards.objects.filter(id=id)
 	context = {
 		'title': 'Edit Card',
 		'card_data': card_data
 	}
-	for d in card_data:
-		print(d.file.url)
-
 	return render(request, 'dashboard/edit-card.html', context)	
 
 def emails(request):

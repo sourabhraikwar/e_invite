@@ -34,7 +34,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="hidden" name="status" id="id_status" value="0">
+							<input type="hidden" name="category" value="birthday">
 							<input type="submit" class="btn btn-primary" value="submit"/>
 						</div>
 					</form>
@@ -52,7 +52,7 @@
 			<div class="row">
 				{% for x in cards_data %}
 				<div class="col-md-4 p-4">
-					<a href="{% url 'edit_card' %}">
+					<a href="{% url 'edit_card' x.id %}">
 						<img src="{{x.image.url}}" class="img-fluid card_view pointer">
 					</a>
 				</div>
