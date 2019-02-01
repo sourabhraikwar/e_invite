@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'invi_cards',
     'dashboard',
     'widget_tweaks',
-    'django_wysiwyg',
-    'ckeditor',
+    # 'django_wysiwyg',
+    # 'ckeditor',
 ]
 
 MIDDLEWARE = [
