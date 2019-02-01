@@ -8,33 +8,40 @@
           <table class="table table-striped table-bordered myTable">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">S.no</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email id</th>
+                <th scope="col">User type</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
+              {% for x in data %}
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{x.id}}</th>
+                <td>{{x.username}}</td>
+                <td>{{x.email}}</td>
+                <td>
+                  {% if x.is_superuser == True %}
+                    Admin
+                  {% else %}
+                    Subscriber
+                  {% endif %}
+                </td>
+
+                <td>
+                  {% if x.is_active == True %}
+                    Active
+                  {% else %}
+                    Inactive
+                  {% endif %}
+                </td>
               </tr>
               <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
+        
         </div>
       </div>
     </div>
