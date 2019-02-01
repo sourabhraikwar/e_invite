@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import *
 from .models import *
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
 # Create your views here.
@@ -14,9 +15,12 @@ def dashboard(request):
 	return render(request, 'dashboard/dashboard.html', context)
 
 def usersList(request):
-
+	data = User.objects.values()
+	for x in data:
+		print(x)
 	context = {
-		'title': 'Users List'
+		'title': 'Users List',
+		'data':data
 	}
 	return render(request, 'dashboard/users-list.html', context)
 
