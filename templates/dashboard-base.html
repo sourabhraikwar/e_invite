@@ -91,12 +91,18 @@
               {% endif %}
             </ul>
           </div>
-        </div>    
+        </div>  
+          
         <div class="col-10 p-0">
+        {% if user.is_active == True and user.is_superuser == True %}
         <h1 class="dash_title">{{title}} {% block title_content %}{% endblock %}</h1>
+        {% else %}
+        <center><h1 class="dash_title">{{title}}</h1></center>
+        {% endif %}
         {% block dash_content %}
         {% endblock %}
         </div>
+
       </div>
     </div>
     <footer class="bg-dark footer-wr">
