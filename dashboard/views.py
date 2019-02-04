@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
@@ -16,13 +16,21 @@ def dashboard(request):
 
 def usersList(request):
 	data = User.objects.values()
-	for x in data:
-		print(x)
 	context = {
 		'title': 'Users List',
 		'data':data
 	}
 	return render(request, 'dashboard/users-list.html', context)
+
+def UserActivation(request, id, slug):
+	status = User.objects.values().get(id=id)
+	if status['is_active'] == True:
+		status['is_active'] == True
+	else:
+		status['is_active'] == False
+	status.update()
+	print(status)
+	return HttpResponseRedirect('/dashboard/users')
 
 def cardsList(request):
 	cards_data = addCards.objects.all()

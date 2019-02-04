@@ -29,19 +29,17 @@
                   {% endif %}
                 </td>
 
-                <td>
+                <td class="text-center">
                   {% if x.is_active == True %}
-                    Active
+                    <!-- <i class="fas fa-1x  fa-toggle-on"></i> --> Active
                   {% else %}
-                    Inactive
+                    <!-- <i class="fas fa-1x  fa-toggle-off"></i> --> Inactive
                   {% endif %}
                 </td>
               </tr>
-              <tr>
               {% endfor %}
             </tbody>
           </table>
-        
         </div>
       </div>
     </div>
