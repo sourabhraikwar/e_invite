@@ -5,6 +5,8 @@ from .models import *
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib import messages
+
 # Create your views here.
 
 def dashboard(request):
@@ -132,13 +134,12 @@ def emails(request):
 			from_email = usermail
 			res = send_mail(sub,msg,from_email, [to], fail_silently=False,auth_user=usermail, auth_password=userpass)
 			if res == True:
-				print(res)
 				send_data.save()
+				messages.success(request, 'Mail sent successfully!')
 				return HttpResponseRedirect('/dashboard/emails')
 
 
 	data = sendEmails.objects.all()
-
 	context = {
 		'title': 'Email',
 		'send_data': send_data,

@@ -1,11 +1,20 @@
 {% extends 'dashboard-base.html' %}
 {% load widget_tweaks %}
+
 {% block title_content %}
-
-<span class="badge badge-primary float-right pointer" data-toggle="modal" data-target="#add_mail" ><i class="fas fa-plus-circle"  ></i>  Compose</span>
-
+		<span class="badge badge-primary float-right pointer" data-toggle="modal" data-target="#add_mail" ><i class="fas fa-plus-circle"  ></i>  Compose</span>
+	
 {% endblock %}
+
 {% block dash_content %}
+{% for message in messages %}
+  <div class="alert alert-success {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
 <div class="container-fluid">
 	<div class="row">
 		<div class="modal fade" id="add_mail" tabindex="-1" role="dialog" aria-labelledby="add_mail" aria-hidden="true">
