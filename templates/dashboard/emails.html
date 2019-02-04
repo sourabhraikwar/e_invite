@@ -1,6 +1,7 @@
 {% extends 'dashboard-base.html' %}
 {% load widget_tweaks %}
 {% block title_content %}
+
 <span class="badge badge-primary float-right pointer" data-toggle="modal" data-target="#add_mail" ><i class="fas fa-plus-circle"  ></i>  Compose</span>
 
 {% endblock %}
@@ -22,21 +23,21 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col">
-									{{ send_data.to|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Enter Receiver Address" }}		
+									{{ send_data.to|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Receiver's Address" }}		
 								</div>
 							</div>	
 						</div>
 						<div class="form-group">
 							<div class="row">
 								<div class="col">
-									{{ send_data.subject|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Enter Subject" }}		
+									{{ send_data.subject|attr:"type: email"|add_class:"form-control"|attr:"placeholder:Subject" }}		
 								</div>
 							</div>	
 						</div>
 						<div class="form-group">
 							<div class="row">
 								<div class="col">
-									{{ send_data.message|attr:"type: email"|add_class:"form-control"|attr:"cols:4"|attr:"rows:4" }}		
+									{{ send_data.message|attr:"type: email"|add_class:"form-control"|attr:"cols:4"|attr:"rows:4" |attr:"placeholder:Message"}}		
 								</div>
 							</div>	
 						</div>
@@ -52,7 +53,7 @@
 			<div class="card">
 				<div class="tab">
 					<button class="tablinks" onclick="tabslist(event, 'sent_mails')">Sent Mails</button>
-					<button class="tablinks" onclick="tabslist(event, 'receive_mails')">Receive Mails</button>
+					<button class="tablinks" onclick="tabslist(event, 'receive_mails')">Received Mails</button>
 				</div>
 				<!-- Tab content -->
 				<div id="sent_mails" class="tabcontent" style="display: block;">
@@ -77,6 +78,18 @@
 				</div>
 
 			<div id="receive_mails" class="tabcontent">
+				<table class="table table-striped table-bordered email-table">
+						<thead>
+							<tr>
+								<th>S.No.</th>
+								<th>Receivers</th>
+								<th>Subject</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
 			</div>
 			</div>
 		</div>

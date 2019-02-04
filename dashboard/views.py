@@ -29,7 +29,6 @@ def UserActivation(request, id, slug):
 	else:
 		status['is_active'] == False
 	status.update()
-	print(status)
 	return HttpResponseRedirect('/dashboard/users')
 
 def cardsList(request):
@@ -127,16 +126,15 @@ def emails(request):
 				if x.status == '1':
 					usermail=x.email
 					userpass=x.password
-			print(send_data)
 			sub = send_data.cleaned_data['subject']
 			msg = send_data.cleaned_data['message']
 			to = send_data.cleaned_data['to']
 			from_email = usermail
 			res = send_mail(sub,msg,from_email, [to], fail_silently=False,auth_user=usermail, auth_password=userpass)
-			print(res)
 			if res == True:
+				print(res)
 				send_data.save()
-				return HttpResponse('mail send successfully')
+				return HttpResponseRedirect('/dashboard/emails')
 
 
 	data = sendEmails.objects.all()
@@ -157,7 +155,6 @@ def settings(request):
 	if request.method == 'POST':
 		
 		email_form = Email_form(request.POST)
-		print(email_form)
 		if email_form.is_valid():
 			email = email_form.cleaned_data['email']
 			password = email_form.cleaned_data['password']
