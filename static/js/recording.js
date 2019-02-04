@@ -1,4 +1,11 @@
+
 const mediaSource = new MediaSource();
+const audio = new Audio("{% static 'media/test_aud.mp3' %}");
+
+audio.addEventListener('loadeddata', ()=> {
+  let duration = audio.duration;
+  console.log(duration);
+})
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 let mediaRecorder;
 let recordedBlobs;
