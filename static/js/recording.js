@@ -1,11 +1,5 @@
 
 const mediaSource = new MediaSource();
-const audio = new Audio("{% static 'media/test_aud.mp3' %}");
-
-audio.addEventListener('loadeddata', ()=> {
-  let duration = audio.duration;
-  console.log(duration);
-})
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 let mediaRecorder;
 let recordedBlobs;
@@ -27,7 +21,6 @@ downloadButton.onclick = download;
 
 const stream = canvas.captureStream(); // frames per second
 console.log('Started stream capture from canvas element: ', stream);
-
 function handleSourceOpen(event) {
   console.log('MediaSource opened');
   sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
@@ -35,7 +28,7 @@ function handleSourceOpen(event) {
 }
 
 function handleDataAvailable(event) {
-  console.log(event.data)
+  console.log(mediaRecorder.state)
   if (event.data && event.data.size > 0) {
     recordedBlobs.push(event.data);
   }
@@ -51,8 +44,8 @@ function toggleRecording() {
   if (recordButton.textContent === 'Start Recording') {
     startRecording();
   } else {
-    stopRecording();
-    downloadButton.disabled = false;
+    // stopRecording();
+    // downloadButton.disabled = false;
     // recordButton.textContent = 'Start Recording';
     // playButton.disabled = false;
   }
@@ -60,7 +53,7 @@ function toggleRecording() {
 
 // The nested try blocks will be simplified when Chrome 47 moves to Stable
 function startRecording() {
-  let options = {mimeType: 'video/webm'};
+  let options = {mimeType: 'video/webm', recorderType: 'MediaStreamRecorder', audio: true};
   recordedBlobs = [];
   try {
     mediaRecorder = new MediaRecorder(stream, options);

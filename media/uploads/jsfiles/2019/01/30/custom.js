@@ -49,6 +49,7 @@ startBtn.onclick = Record;
 playBtn.onclick = playOnly;
 updateBtn.onclick = playOnly;
 window.onload = playOnly;
+window.onload = dataflow;
 
 function Record() {
 	startRecording();
@@ -59,5 +60,6 @@ function playOnly() {
 	draw();
 }
 
-document.getElementById("first_line").addEventListener("keyup", changeFirstLine());
-document.getElementById("last_line").addEventListener("keyup", changeLastLine());
+document.getElementById("first_line").addEventListener("keyup", changeFirstLine);
+document.getElementById("last_line").addEventListener("keyup", changeLastLine);
+
