@@ -63,12 +63,16 @@
         <div class="col-2 p-0">
           <div class="sidebar_wr">
             <ul>
+              {% if user.is_active == True and user.is_superuser == True %}
               <li>
                 <a href="{% url 'dashboard' %}"> <i class="mx-2 fas fa-tachometer-alt"></i> Dashboard</a>
               </li>
               <li>
+                
                 <a href="{% url 'userslist' %}"><i class="mx-2 fas fa-users"></i> Users</a>
+                
               </li>
+              {% endif %}
               <li>
                 <a id="cards" href="#"> <i class="mx-2 fas fa-cubes"></i> Cards</a>
                 <div id="cards_list">
@@ -77,20 +81,28 @@
                   <a href="{% url 'inauguration' %}">Inauguration cards</a>
                 </div>
               </li>
+              {% if user.is_active == True and user.is_superuser == True %}
               <li>
                 <a href="{% url 'emails' %}"> <i class="mx-2 fas fa-envelope"></i> Emails</a>
               </li>
               <li>
                 <a href="{% url 'settings' %}"> <i class="mx-2 fas fa-cog"></i> Settings</a>
               </li>
+              {% endif %}
             </ul>
           </div>
-        </div>    
+        </div>  
+          
         <div class="col-10 p-0">
+        {% if user.is_active == True and user.is_superuser == True %}
         <h1 class="dash_title">{{title}} {% block title_content %}{% endblock %}</h1>
+        {% else %}
+        <center><h1 class="dash_title">{{title}}</h1></center>
+        {% endif %}
         {% block dash_content %}
         {% endblock %}
         </div>
+
       </div>
     </div>
     <footer class="bg-dark footer-wr">

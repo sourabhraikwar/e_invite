@@ -2,20 +2,80 @@
 
 {% block dash_content %}
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-12">
-			<div class="card user_profile shadow">
+	<div class="row" >
+		<div class="col-8" >
+			<div class="card user_profile shadow" style="background-color: #c2d6d6;">
 				<div class="card-body">
-					<ul>
-						<li><strong class="mx-2">Username: </strong> {{user.username}}</li>
-						<li><strong class="mx-2">Firstname: </strong>{{user.firstname}}</li>
-						<li><strong class="mx-2">Lastname: </strong>{{user.lastname}}</li>
-						<li><strong class="mx-2">Emailid: </strong>{{user.emailid}}</li>
-						<li><strong class="mx-2">Mobile: </strong>{{user.mobile}}</li>
-					</ul>
+					<div class="row">
+				<div class="col-sm-5 col-md-4 col-7">
+					<label style="font-weight:bold;">Username</label>
+				</div>
+				<div class="col-md-8 col-6">
+					{{user.get_username}}
+				</div>
+			</div>
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-5 col-md-4 col-7">
+					<label style="font-weight:bold;">First Name</label>
+				</div>
+				<div class="col-md-8 col-6">
+					{{user.first_name}}
+				</div>
+			</div>
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-5 col-md-4 col-7">
+					<label style="font-weight:bold;">Last Name</label>
+				</div>
+				<div class="col-md-8 col-6">
+					{{user.last_name}}
+				</div>
+			</div>
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-5 col-md-4 col-7">
+					<label style="font-weight:bold;">Email Address</label>
+				</div>
+				<div class="col-md-8 col-6">
+					{{user.email}}
+				</div>
+			</div>
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-5 col-md-4 col-7">
+					<label style="font-weight:bold;">User Type</label>
+				</div>
+				{% if user.is_superuser == True %}
+				<div class="col-md-8 col-6">
+					<p>Admin</p>
+				</div>
+				{% else %}
+				<div class="col-md-8 col-6">
+					<p>Subscriber</p>
+				</div>
+				{% endif %}
+			</div>
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-5 col-md-4 col-7">
+					<label style="font-weight:bold;">Mobile</label>
+				</div>
+				<div class="col-md-8 col-6">
+					
+				</div>
+			</div>
+			<hr />
+					
 				</div>
 			</div>			
 		</div>	
 	</div>
 </div>
+
 {% endblock %}
