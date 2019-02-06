@@ -25,6 +25,6 @@ driver.find_element_by_id('start').click()
 time.sleep(5)
 driver.find_element_by_id('download').click()
 
-os.system("ffmpeg -i /home/lap01/Py_Virtual/e_invite/media/cards_videos/test.webm -i /home/lap01/Py_Virtual/e_invite/media/audio/audio.ogg -c:v copy -map 0:v:0 -map 1:a:0 -c:a aac -b:a 192k output.webm")
+# os.system("ffmpeg -i /home/lap01/Py_Virtual/e_invite/media/cards_videos/test.webm -i /home/lap01/Py_Virtual/e_invite/media/audio/audio.ogg -c:v copy -map 0:v:0 -map 1:a:0 -c:a aac -b:a 192k output.mp4")
 
-driver.close()
+# driver.close()
