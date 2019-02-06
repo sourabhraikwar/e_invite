@@ -5,7 +5,7 @@ import os
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument("--test-type")
-prefs = {"download.default_directory" : "/home/lap01/Py_Virtual/e_invite/media/cards_videos"}
+prefs = {"download.default_directory" : "/home/webllisto/workspace/e_invite/static/media"}
 options.add_experimental_option("prefs",prefs)
 driver = webdriver.Chrome(chrome_options=options, executable_path="chromedriver")
 driver.get('http://192.168.1.34:8000/accounts/login/')
@@ -25,6 +25,6 @@ driver.find_element_by_id('start').click()
 time.sleep(5)
 driver.find_element_by_id('download').click()
 
-os.system("ffmpeg -i /home/lap01/Py_Virtual/e_invite/media/cards_videos/test.webm -i /home/lap01/Py_Virtual/e_invite/media/audio/audio.ogg -c:v copy -map 0:v:0 -map 1:a:0 -c:a aac -b:a 192k output.webm")
+os.system("ffmpeg -i ../static/media/test.webm -i ../static/media/test_aud.ogg -c copy -map 0:0 -map 1:0 Output.webm")
 
-driver.close()
+# driver.close()
