@@ -14,7 +14,7 @@
 {{form.password | add_class:"form-control" | attr:"placeholder:Enter Password"}}
 </div>
 <input type="hidden" name="next" value="{{ next }}" />
-<input type="submit" class="btn btn-secondary btn-lg" value="Login" /> 
+<input id="submit" type="submit" class="btn btn-secondary btn-lg" value="Login" /> 
 <a class="float-right mt-3" href="{% url 'reset' %}">Forgot password?</a>
 </form>
 </div>
