@@ -32,4 +32,9 @@ $(document).ready(function(){
   });
 });
 
+// const audio = new Audio();
 
+//     .then(stream => {
+//     const mediaRecorder = new MediaRecorder(stream);
+//     mediaRecorder.start();
+// });

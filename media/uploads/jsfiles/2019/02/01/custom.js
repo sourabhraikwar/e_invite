@@ -40,7 +40,10 @@ function draw() {
 		setTimeout(draw, 10);
 	}else{
 		count=100;
-		stopRecording();
+		if (MediaRecorder.state == 'active'){
+			stopRecording();
+			console.log('problem is here');
+		}
 	    downloadButton.disabled = false;
 	}
 }
@@ -59,5 +62,5 @@ function playOnly() {
 	draw();
 }
 
-document.getElementById("first_line").addEventListener("keyup", changeFirstLine());
-document.getElementById("last_line").addEventListener("keyup", changeLastLine());
+document.getElementById("first_line").addEventListener("keyup", changeFirstLine);
+document.getElementById("last_line").addEventListener("keyup", changeLastLine);

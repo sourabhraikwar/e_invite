@@ -59,5 +59,37 @@ function playOnly() {
 	draw();
 }
 
-document.getElementById("first_line").addEventListener("keyup", changeFirstLine());
-document.getElementById("last_line").addEventListener("keyup", changeLastLine());
+document.getElementById("first_line").addEventListener("keyup", changeFirstLine);
+document.getElementById("last_line").addEventListener("keyup", changeLastLine);
+
+// audio play
+var audioElement = new Audio;
+audioElement.src = 'http://192.168.1.34:8000/static/media/test_aud.mp3';
+
+audioElement.addEventListener('ended', function() {
+    this.play();
+}, false);
+
+audioElement.addEventListener("canplay",function(){
+    $("#length").text("Duration:" + audioElement.duration + " seconds");
+    $("#source").text("Source:" + audioElement.src);
+    $("#status").text("Status: Ready to play").css("color","green");
+});
+
+audioElement.addEventListener("timeupdate",function(){
+    $("#currentTime").text("Current second:" + audioElement.currentTime);
+});
+
+$('#playbutton').click(function() {
+    audioElement.play();
+    $("#status").text("Status: Playing");
+});
+
+$('#pausebutton').click(function() {
+    audioElement.pause();
+    $("#status").text("Status: Paused");
+});
+
+$('#restartbutton').click(function() {
+    audioElement.currentTime = 0;
+});
