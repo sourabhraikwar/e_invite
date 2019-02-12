@@ -157,7 +157,7 @@ var csrftoken = getCookie('csrftoken');
 function download() {
   let blob = new Blob(recordedBlobs, {type: 'video/webm'});
   let fd = new FormData;
-  fd.append("audioRecording", blob);
+  fd.append("blob", blob);
   fd.append("csrfmiddlewaretoken" , csrftoken);
   let request = new XMLHttpRequest();
   request.open("POST", "http://localhost:8000/dashboard/videoCreation", true);

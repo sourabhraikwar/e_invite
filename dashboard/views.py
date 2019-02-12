@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
@@ -7,6 +7,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
 import json
+from datetime import datetime
+import os, socket
 # Create your views here.
 
 def dashboard(request):
@@ -178,9 +180,33 @@ def profile(request):
 
 def videoCreation(request):
 
-	with open("demo.webm", 'wb+') as f:
-		for x in request.FILES['audioRecording'].chunks():
-			f.write(x)
+	if request.method == 'POST':
+		base_dir = "card_video_file"
+		path = base_dir + "/recordings/" + request.user.username + "/"
+		userID = request.user.id
+
+		filename = "video_file" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+		print("Filepath: %s" % path)
+
+		if not os.path.exists(path):
+			os.makedirs(path)
+
+		extension = ".webm"
+		with open(path + filename + extension, 'wb+') as destination:
+			for chunk in request.FILES['blob'].chunks():
+				destination.write(chunk)
+
+		data = {
+			"data": "successfully saved"
+		}
+
+		# ffmpeg.exe -ss 00:00:10  -t 5 -i "video.mp4" -ss 0:00:01 -t 5 -i "music.m4a" -map 0:v:0 -map 1:a:0 -y out.mp4
+
+
+		return JsonResponse(data)
+		# with open("demo.webm", 'wb+') as f:
+		# 	for x in request.FILES['audioRecording'].chunks():
+		# 		f.write(x)
 
 	context = {
 		'title': 'video creation',
