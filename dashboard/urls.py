@@ -12,6 +12,6 @@ urlpatterns = [
 	path('birthday-cards', birthdayCardsList, name='birthday'),
 	path('inauguration-cards', inaugurationcardsList, name='inauguration'),
 	path('edit_card/<int:id>', editCard, name='edit_card'),
-	path('editor', editor, name='editor'),
+	path('videoCreation', videoCreation, name='videoCreation'),
 ]
 

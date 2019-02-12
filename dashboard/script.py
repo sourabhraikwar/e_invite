@@ -5,6 +5,7 @@ import os
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument("--test-type")
+options.add_argument("--headless")
 prefs = {"download.default_directory" : "/home/webllisto/workspace/e_invite/static/media"}
 options.add_experimental_option("prefs",prefs)
 driver = webdriver.Chrome(chrome_options=options, executable_path="chromedriver")

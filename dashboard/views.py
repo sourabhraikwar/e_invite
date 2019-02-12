@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
-
+import json
 # Create your views here.
 
 def dashboard(request):
@@ -176,14 +176,15 @@ def profile(request):
 	}
 	return render(request, 'dashboard/profile.html', context)
 
-def editor(request):
-	context ={
-	
-	}
-	return render(request, 'dashboard/editor.html', context)
+def videoCreation(request):
 
-# def cards(request):
-# 	context ={
-	
-# 	}
-# 	return render(request, 'invi_cards/card.html', context)	
+	with open("demo.webm", 'wb+') as f:
+		for x in request.FILES['audioRecording'].chunks():
+			f.write(x)
+
+	context = {
+		'title': 'video creation',
+	}
+
+	return HttpResponse(context)
+
