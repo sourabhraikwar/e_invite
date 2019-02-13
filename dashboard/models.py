@@ -13,7 +13,13 @@ class sendEmails(models.Model):
 
 
 class addCards(models.Model):
-	image = models.ImageField(upload_to='uploads/image/%Y/%m/%d')
-	file = models.FileField(upload_to='uploads/jsfiles/%Y/%m/%d')
+	image = models.ImageField(upload_to='uploads/%Y/%m/%d/image', blank=True)
+	file = models.FileField(upload_to='uploads/%Y/%m/%d/jsfiles', blank=True)
+	audio = models.FileField(upload_to='uploads/%Y/%m/%d/audiofiles', blank=True)
 	category = models.CharField(max_length=20, blank=True)
+
+
+class createdVideos(models.Model):
+	output = models.FileField()
+	user_rel = models.CharField(max_length=20)
 		
