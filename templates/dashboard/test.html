@@ -1,8 +1,0 @@
-{% extends 'dashboard-base.html' %}
-{% load static %}
-
-{% block dash_content %}
-<video width="600" height="600" onclick="this.paused ? this.play() : this.pause();">
-	<source type="video/webm" src="{% static '/media/Output.webm' %}">
-</video>
-{% endblock %}

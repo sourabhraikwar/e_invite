@@ -2,45 +2,4 @@
 <div class="card_wr">
 {% block content %}
  <div class="alert alert-success">Home</div>
-
- <div class="container-fluid">
- 	<h2>Wedding Cards</h2>
-			<div class="row">
-
-				{% for x in cards_data %}
-					{% if x.category == 'wedding' %}
-						<div class="col-md-4 p-4">
-							<a href="{% url 'edit_card' x.id %}">
-								<img src="{{x.image.url}}" class="img-fluid card_view pointer">
-							</a>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
-			<h2>Birthday Cards</h2>
-			<div class="row">
-				{% for x in cards_data %}
-					{% if x.category == 'birthday' %}
-						<div class="col-md-4 p-4">
-							<a href="{% url 'edit_card' x.id %}">
-								<img src="{{x.image.url}}" class="img-fluid card_view pointer">
-							</a>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
-			<h2>Inauguration Cards</h2>
-			<div class="row">
-				{% for x in cards_data %}
-					{% if x.category == 'inauguration' %}
-						<div class="col-md-4 p-4">
-							<a href="{% url 'edit_card' x.id %}">
-								<img src="{{x.image.url}}" class="img-fluid card_view pointer">
-							</a>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
-		</div>
- 
 {% endblock%}

@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from .forms import *
-from .models import *
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
-import json
 from datetime import datetime
+from .forms import *
+from .models import *
 import os, socket
 # Create your views here.
 
@@ -25,15 +24,6 @@ def usersList(request):
 		'data':data
 	}
 	return render(request, 'dashboard/users-list.html', context)
-
-def UserActivation(request, id, slug):
-	status = User.objects.values().get(id=id)
-	if status['is_active'] == True:
-		status['is_active'] == True
-	else:
-		status['is_active'] == False
-	status.update()
-	return HttpResponseRedirect('/dashboard/users')
 
 def cardsList(request):
 	cards_data = addCards.objects.all()
@@ -200,7 +190,7 @@ def videoCreation(request):
 			"data": "successfully saved"
 		}
 
-		# ffmpeg.exe -ss 00:00:10  -t 5 -i "video.mp4" -ss 0:00:01 -t 5 -i "music.m4a" -map 0:v:0 -map 1:a:0 -y out.mp4
+		os.system("ffmpeg -i /home/webllisto/workspace/e_invite/card_video_file/recordings/webllisto/video_file2019-02-12_11-51-05.webm -i /home/webllisto/workspace/e_invite/static/media/test_aud.ogg -c copy -map 0:0 -map 1:0 Output.webm")
 
 
 		return JsonResponse(data)
@@ -212,5 +202,5 @@ def videoCreation(request):
 		'title': 'video creation',
 	}
 
-	return HttpResponse(context)
+	return JsonResponse(context)
 
