@@ -96,17 +96,76 @@ function stopRecording() {
 //   video.play();
 // }
 
+// function download() {
+//   const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+//   const url = window.URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.style.display = 'none';
+//   a.href = url;
+//   a.download = 'test.webm';
+//   document.body.appendChild(a);
+//   a.click();
+//   setTimeout(() => {
+//     document.body.removeChild(a);
+//     window.URL.revokeObjectURL(url);
+//   }, 100);
+// }
+
+// function download() {
+//   console.log(recordedBlobs);
+//   $.ajax({
+//     type: "POST",
+//     dataType: "json",
+//     data: JSON.stringify(recordedBlobs),
+//     url: "http://localhost:8000/dashboard/videoCreation",
+//     success: function(msg){
+//       console.log(msg);
+//      }
+//   });
+// }
+
+
+// function download() {
+//   let blob = new Blob(recordedBlobs, {type: 'video/webm'});
+//   let fd = new FormData;
+//   fd.append("audioRecording", blob);
+//   fetch("http://localhost:8000/dashboard/videoCreation", {method:"POST", body:fd})
+//   .then(response => response.ok)
+//   .then(res => console.log(res))
+//   .catch(err => console.error(err));
+// }
+// using jQuery
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
 function download() {
-  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.download = 'test.webm';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  }, 100);
+  let blob = new Blob(recordedBlobs, {type: 'video/webm'});
+  let fd = new FormData;
+  fd.append("blob", blob);
+  fd.append("csrfmiddlewaretoken" , csrftoken);
+  let request = new XMLHttpRequest();
+  request.open("POST", "http://localhost:8000/dashboard/videoCreation", true);
+  request.onload = function() {
+    // do stuff
+  }
+  request.onerror = function() {
+   // handle error
+  }
+  request.send(fd);
 }

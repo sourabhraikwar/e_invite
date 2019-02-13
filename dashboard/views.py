@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from .forms import *
-from .models import *
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
-
+from datetime import datetime
+from .forms import *
+from .models import *
+import os, socket
 # Create your views here.
 
 def dashboard(request):
@@ -23,15 +24,6 @@ def usersList(request):
 		'data':data
 	}
 	return render(request, 'dashboard/users-list.html', context)
-
-def UserActivation(request, id, slug):
-	status = User.objects.values().get(id=id)
-	if status['is_active'] == True:
-		status['is_active'] == True
-	else:
-		status['is_active'] == False
-	status.update()
-	return HttpResponseRedirect('/dashboard/users')
 
 def cardsList(request):
 	cards_data = addCards.objects.all()
@@ -176,14 +168,39 @@ def profile(request):
 	}
 	return render(request, 'dashboard/profile.html', context)
 
-def editor(request):
-	context ={
-	
-	}
-	return render(request, 'dashboard/editor.html', context)
+def videoCreation(request):
 
-# def cards(request):
-# 	context ={
-	
-# 	}
-# 	return render(request, 'invi_cards/card.html', context)	
+	if request.method == 'POST':
+		base_dir = "card_video_file"
+		path = base_dir + "/recordings/" + request.user.username + "/"
+		userID = request.user.id
+
+		filename = "video_file" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+		print("Filepath: %s" % path)
+
+		if not os.path.exists(path):
+			os.makedirs(path)
+
+		extension = ".webm"
+		with open(path + filename + extension, 'wb+') as destination:
+			for chunk in request.FILES['blob'].chunks():
+				destination.write(chunk)
+
+		data = {
+			"data": "successfully saved"
+		}
+
+		os.system("ffmpeg -i /home/webllisto/workspace/e_invite/card_video_file/recordings/webllisto/video_file2019-02-12_11-51-05.webm -i /home/webllisto/workspace/e_invite/static/media/test_aud.ogg -c copy -map 0:0 -map 1:0 Output.webm")
+
+
+		return JsonResponse(data)
+		# with open("demo.webm", 'wb+') as f:
+		# 	for x in request.FILES['audioRecording'].chunks():
+		# 		f.write(x)
+
+	context = {
+		'title': 'video creation',
+	}
+
+	return JsonResponse(context)
+
