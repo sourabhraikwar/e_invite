@@ -102,8 +102,11 @@ function download() {
   fd.append("csrfmiddlewaretoken" , csrftoken);
   let request = new XMLHttpRequest();
   request.open("POST", "http://localhost:8000/dashboard/videoCreation", true);
-  request.onload = function() {
-    // do stuff
+  request.onload = msg => {
+    var obj = JSON.parse(msg.target.responseText);
+    if (obj.success_data == "successfully saved") {
+      window.location.href = "http://localhost:8000/dashboard";
+    }
   }
   request.onerror = function() {
    // handle error

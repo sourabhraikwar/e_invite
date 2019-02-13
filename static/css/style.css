@@ -204,8 +204,8 @@ div#cards_list a{
 }
 
 /*home page css*/
-
-.card_slider > div{
+span.card_img_wr {
+	position: relative;
 	width: 100%;
 	height: 90vh;
 	background-color: #fff;
@@ -233,4 +233,12 @@ div#cards_list a{
 
 .slick-dots{
 	bottom: 30px!important;
+}
+
+.card_img {
+    width: 300px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    right: 10%;
 }

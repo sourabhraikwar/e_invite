@@ -29,4 +29,13 @@
 		</div>
 	</div>
 </div>
+<div class="container-fluid my-3">
+	<div class="row">
+		{% for video in videos %}
+		<div class="col-md-3">
+			<a class="btn btn-success" href="{{video.output.url}}">Download card</a>
+		</div>				
+		{% endfor %}
+	</div>
+</div>
 {% endblock%}

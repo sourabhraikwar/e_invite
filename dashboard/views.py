@@ -12,8 +12,10 @@ import os, socket
 
 def dashboard(request):
 
+	video_list = createdVideos.objects.filter(user_rel=request.user.id)
 	context = {
-		'title': 'Dashboard'
+		'title': 'Dashboard',
+		'videos': video_list
 	}
 	return render(request, 'dashboard/dashboard.html', context)
 
@@ -172,30 +174,36 @@ def profile(request):
 def videoCreation(request):
 
 	if request.method == 'POST':
-		base_dir = "card_video_file"
-		path = base_dir + "/recordings/" + request.user.username + "/"
+		base_dir = "media/"
+		path =  "card_video_file/" + request.user.username + "/"
 		card_id = request.POST['card_id']
-		filename = "video_file_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-		print("Filepath: %s" % path)
-		
-		if not os.path.exists(path):
-			os.makedirs(path)
-
 		host = "http://"+request.META['HTTP_HOST']
 		extension = ".webm"
-		fullpath = path + filename + extension
+		raw_file = base_dir + path + "video_file_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + extension
+		output_file =  path + "output"+ datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + extension
 		
-		with open(fullpath, 'wb+') as destination:
+		if not os.path.exists(base_dir + path):
+			os.makedirs(base_dir + path)
+
+		
+		with open(raw_file, 'wb+') as destination:
 			for chunk in request.FILES['blob'].chunks():
 				destination.write(chunk)
 
 		card_data = addCards.objects.filter(id=card_id)
+
 		for x in card_data:
 			audio_url = x.audio.url
-		os.system("ffmpeg -i "+fullpath+" -i "+host+audio_url+" -c copy -map 0:0 -map 1:0 Output.webm")
+
+		os.system("ffmpeg -i "+raw_file+" -i "+host+audio_url+" -c copy -map 0:0 -map 1:0 " + base_dir + output_file)
+		vid = createdVideos(output=output_file, user_rel=request.user.id)
+		vid.save()
+
+		if os.path.isfile(raw_file):
+		    os.remove(raw_file)
 
 	data = {
-		"data": "successfully saved"
+		"success_data": "successfully saved"
 	}
 
 	return JsonResponse(data)

@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Email_model)
 admin.site.register(sendEmails)
 admin.site.register(addCards)
+admin.site.register(createdVideos)
