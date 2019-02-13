@@ -1,3 +1,4 @@
+
 const mediaSource = new MediaSource();
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 let mediaRecorder;
@@ -7,11 +8,11 @@ let sourceBuffer;
 const canvas = document.querySelector('canvas#animation');
 // const video = document.querySelector('video');
 
-const recordButton = document.querySelector('button#record');
-const stopButton = document.querySelector('button#stop');
+// const recordButton = document.querySelector('button#record');
+// const stopButton = document.querySelector('button#stop');
 // // const playButton = document.querySelector('button#play');
 const downloadButton = document.querySelector('button#download');
-recordButton.onclick = toggleRecording;
+// recordButton.onclick = toggleRecording;
 // // playButton.onclick = play;
 downloadButton.onclick = download;
 
@@ -20,7 +21,6 @@ downloadButton.onclick = download;
 
 const stream = canvas.captureStream(); // frames per second
 console.log('Started stream capture from canvas element: ', stream);
-
 function handleSourceOpen(event) {
   console.log('MediaSource opened');
   sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
@@ -28,7 +28,7 @@ function handleSourceOpen(event) {
 }
 
 function handleDataAvailable(event) {
-  console.log(event.data)
+  console.log(mediaRecorder.state)
   if (event.data && event.data.size > 0) {
     recordedBlobs.push(event.data);
   }
@@ -44,16 +44,16 @@ function toggleRecording() {
   if (recordButton.textContent === 'Start Recording') {
     startRecording();
   } else {
-    stopRecording();
-    recordButton.textContent = 'Start Recording';
+    // stopRecording();
+    // downloadButton.disabled = false;
+    // recordButton.textContent = 'Start Recording';
     // playButton.disabled = false;
-    downloadButton.disabled = false;
   }
 }
 
 // The nested try blocks will be simplified when Chrome 47 moves to Stable
 function startRecording() {
-  let options = {mimeType: 'video/webm'};
+  let options = {mimeType: 'video/webm', recorderType: 'MediaStreamRecorder', audio: true};
   recordedBlobs = [];
   try {
     mediaRecorder = new MediaRecorder(stream, options);
@@ -77,9 +77,9 @@ function startRecording() {
     }
   }
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
-  recordButton.textContent = 'Stop Recording';
+  // recordButton.textContent = 'Stop Recording';
   // playButton.disabled = true;
-  // downloadButton.disabled = true;
+  downloadButton.disabled = true;
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start(100); // collect 100ms of data
@@ -96,17 +96,76 @@ function stopRecording() {
 //   video.play();
 // }
 
+// function download() {
+//   const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+//   const url = window.URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.style.display = 'none';
+//   a.href = url;
+//   a.download = 'test.webm';
+//   document.body.appendChild(a);
+//   a.click();
+//   setTimeout(() => {
+//     document.body.removeChild(a);
+//     window.URL.revokeObjectURL(url);
+//   }, 100);
+// }
+
+// function download() {
+//   console.log(recordedBlobs);
+//   $.ajax({
+//     type: "POST",
+//     dataType: "json",
+//     data: JSON.stringify(recordedBlobs),
+//     url: "http://localhost:8000/dashboard/videoCreation",
+//     success: function(msg){
+//       console.log(msg);
+//      }
+//   });
+// }
+
+
+// function download() {
+//   let blob = new Blob(recordedBlobs, {type: 'video/webm'});
+//   let fd = new FormData;
+//   fd.append("audioRecording", blob);
+//   fetch("http://localhost:8000/dashboard/videoCreation", {method:"POST", body:fd})
+//   .then(response => response.ok)
+//   .then(res => console.log(res))
+//   .catch(err => console.error(err));
+// }
+// using jQuery
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
 function download() {
-  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.download = 'test.webm';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  }, 100);
+  let blob = new Blob(recordedBlobs, {type: 'video/webm'});
+  let fd = new FormData;
+  fd.append("blob", blob);
+  fd.append("csrfmiddlewaretoken" , csrftoken);
+  let request = new XMLHttpRequest();
+  request.open("POST", "http://localhost:8000/dashboard/videoCreation", true);
+  request.onload = function() {
+    // do stuff
+  }
+  request.onerror = function() {
+   // handle error
+  }
+  request.send(fd);
 }
