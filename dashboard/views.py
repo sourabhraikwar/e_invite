@@ -45,6 +45,7 @@ def cardsList(request):
 
 def weddingCardsList(request):
 	cat_wedding ='wedding'
+	id = "1"
 	cards_data = addCards.objects.filter(category=cat_wedding)
 	cardform = CardForm()
 	if request.method == 'POST':
@@ -173,34 +174,30 @@ def videoCreation(request):
 	if request.method == 'POST':
 		base_dir = "card_video_file"
 		path = base_dir + "/recordings/" + request.user.username + "/"
-		userID = request.user.id
-
-		filename = "video_file" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+		card_id = request.POST['card_id']
+		filename = "video_file_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 		print("Filepath: %s" % path)
-
+		
 		if not os.path.exists(path):
 			os.makedirs(path)
 
+		host = "http://"+request.META['HTTP_HOST']
 		extension = ".webm"
-		with open(path + filename + extension, 'wb+') as destination:
+		fullpath = path + filename + extension
+		
+		with open(fullpath, 'wb+') as destination:
 			for chunk in request.FILES['blob'].chunks():
 				destination.write(chunk)
 
-		data = {
-			"data": "successfully saved"
-		}
+		card_data = addCards.objects.filter(id=card_id)
+		for x in card_data:
+			audio_url = x.audio.url
+		os.system("ffmpeg -i "+fullpath+" -i "+host+audio_url+" -c copy -map 0:0 -map 1:0 Output.webm")
 
-		os.system("ffmpeg -i /home/webllisto/workspace/e_invite/card_video_file/recordings/webllisto/video_file2019-02-12_11-51-05.webm -i /home/webllisto/workspace/e_invite/static/media/test_aud.ogg -c copy -map 0:0 -map 1:0 Output.webm")
-
-
-		return JsonResponse(data)
-		# with open("demo.webm", 'wb+') as f:
-		# 	for x in request.FILES['audioRecording'].chunks():
-		# 		f.write(x)
-
-	context = {
-		'title': 'video creation',
+	data = {
+		"data": "successfully saved"
 	}
 
-	return JsonResponse(context)
+	return JsonResponse(data)
+
 

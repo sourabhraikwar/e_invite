@@ -34,18 +34,10 @@
 		</div>
 	</div>
 </div>
-<h2>Sound Information</h2>
-   <div id="length">Duration:</div>
-   <div id="source">Source:</div>
-   <div id="status" style="color:red;">Status: Loading</div>
-   <hr>
-   <h2>Control Buttons</h2>
-   <button id="playbutton">Play</button>
-   <button id="pausebutton">Pause</button>
-   <button id="restartbutton">Restart</button>
-   <hr>
-   <h2>Playing Information</h2>
-   <div id="currentTime">0</div>
+{% for x in card_data %}
+	<div class="d-none" id="card_id">{{x.id}}</div>
+{% endfor %}
+
 {% endblock %}
 
 {% block extra_script %}
