@@ -20,6 +20,6 @@ class addCards(models.Model):
 
 
 class createdVideos(models.Model):
-	output = models.FileField()
+	output = models.FileField(upload_to='uploads/%Y/%m/%d/output_file', blank=True)
 	user_rel = models.CharField(max_length=20)
 		
