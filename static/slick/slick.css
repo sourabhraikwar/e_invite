@@ -1,42 +1,4 @@
-.rio-promos {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.slick-slide {
-  margin: 0 5px;
-}
-.slick-list {
-  margin: 0px -5px 0px -5px;
-}
-button.slick-next, button.slick-next:hover {
-  position: absolute;
-  top: 41%;
-  right: 54px;
-  width: 47px;
-  height: 75px;
-  background-image: url("http://maggiesadler.com/wp-content/uploads/2015/10/left-right-arrow.png");
-  background-size: 95px;
-}
-button.slick-prev, button.slick-prev:hover {
-  position: absolute;
-  top: 41%;
-  left: 15px;
-  z-index: 1;
-  width: 47px;
-  height: 75px;
-  background-image: url("http://maggiesadler.com/wp-content/uploads/2015/10/left-right-arrow.png");
-  background-size: 95px;
-      background-position-x: right;
-}
-.slick-prev:before, .slick-next:before {
-  font-size: 70px;
-  color: #EA8496;
-  line-height: inherit;
-  font-weight: bold;
-}
-.rio-promos img {
-  height: 324px;
-}
+
 
 /* Slick Slider Styles -- Provided by https://kenwheeler.github.io/slick/ */
 /* Slider */
