@@ -1,33 +1,62 @@
 {% extends 'base.html' %}
-<div class="card_wr">
 {% block content %}
-	<div class="card_slider">
-	  <div>
-	  	<img src="img-fluid card_img">
-	  	<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	  	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	  	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	  	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	  	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	  	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-	  </div>
-	  <div>
-	  	<img src="img-fluid card_img">
-	  	<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	  	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	  	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	  	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	  	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	  	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-	  </div>
-	  <div>
-	  	<img src="img-fluid card_img">
-	  	<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	  	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	  	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	  	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	  	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	  	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-	  </div>
+
+<!-- <div class="main">
+  <div class="slider slider-for">
+    {% for x in cards_data %}
+			{% if x.category == 'wedding' %}
+	  			<div>
+	  				<center><a href="{% url 'edit_card' x.id  %}">
+	  				<img src="{{x.image.url}}"></a>
+	  				<span>This is Wedding Card.</span></center>
+	  			</div>
+	  		{% elif x.category == 'birthday' %}
+	  			<div>
+	  				<center><a href="{% url 'edit_card' x.id  %}">
+	  				<img src="{{x.image.url}}"></a>
+	  				<span>This is Birthday Card.</span></center>
+	  			</div>
+	  		{% elif x.category == 'inauguration' %}
+	  			<div>
+	  				<center><a href="{% url 'edit_card' x.id  %}">
+	  				<img src="{{x.image.url}}"></a>
+	  				<span>This is Inauguration Card.</span></center>
+	  			</div>
+	  		{% endif %}
+	  	{% endfor %}
+  </div>
+  <div class="slider slider-nav">
+    {% for x in cards_data %}
+			{% if x.category == 'wedding' %}
+	  			<div>
+	  				<center><a href="{% url 'edit_card' x.id  %}">
+	  				<img src="{{x.image.url}}"></a>
+	  				<span>This is Wedding Card.</span></center>
+	  			</div>
+	  		{% elif x.category == 'birthday' %}
+	  			<div>
+	  				<center><a href="{% url 'edit_card' x.id  %}">
+	  				<img src="{{x.image.url}}"></a>
+	  				<span>This is Birthday Card.</span></center>
+	  			</div>
+	  		{% elif x.category == 'inauguration' %}
+	  			<div>
+	  				<center><a href="{% url 'edit_card' x.id  %}">
+	  				<img src="{{x.image.url}}"></a>
+	  				<span>This is Inauguration Card.</span></center>
+	  			</div>
+	  		{% endif %}
+	  	{% endfor %}
+  </div>
+</div> -->
+
+<div class="rio-promos">
+	  	{% for x in cards_data %}
+			
+			<a href="{% url 'edit_card' x.id  %}"><img src="{{x.image.url}}"></a>
+
+		{% endfor %}
 	</div>
+
+
 {% endblock%}

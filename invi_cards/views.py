@@ -6,11 +6,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .forms import *
 from .models import *
+from dashboard.models import addCards
 # Create your views here.
 
 def home(request):
+	cards_data = addCards.objects.all()
 	context = {
 		'title': 'Home',
+		'cards_data': cards_data
 	}
 	
 	return render(request, 'invi_cards/home.html', context)
