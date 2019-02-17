@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dashboard.views &mdash; e-invite 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> e-invite
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Project Packages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../e_invite.html">e_invite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invi_cards.html">invi_cards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dashboard.html">dashboard</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">e-invite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>dashboard.views</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dashboard.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="k">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="k">import</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="k">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="k">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.core.mail</span> <span class="k">import</span> <span class="n">send_mail</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="k">import</span> <span class="n">messages</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">socket</span>
+<span class="c1"># Create your views here.</span>
+
+<div class="viewcode-block" id="dashboard"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.dashboard">[docs]</a><span class="k">def</span> <span class="nf">dashboard</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;this method containing dashboard functionality&quot;&quot;&quot;</span>
+	<span class="n">video_list</span> <span class="o">=</span> <span class="n">createdVideos</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user_rel</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Dashboard&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;videos&#39;</span><span class="p">:</span> <span class="n">video_list</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/dashboard.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="usersList"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.usersList">[docs]</a><span class="k">def</span> <span class="nf">usersList</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="n">data</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Users List&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">data</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/users-list.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="cardsList"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.cardsList">[docs]</a><span class="k">def</span> <span class="nf">cardsList</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="n">cards_data</span> <span class="o">=</span> <span class="n">addCards</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+	<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">cardform</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">cardform</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+			<span class="c1"># return HttpResponse(&#39;Card Saved Successfully&#39;)</span>
+
+		
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Cards List&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;cardform&#39;</span><span class="p">:</span> <span class="n">cardform</span><span class="p">,</span>
+		<span class="s1">&#39;cards_data&#39;</span><span class="p">:</span> <span class="n">cards_data</span>
+		<span class="c1"># &#39;cards&#39;:cards,</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/cards-list.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="weddingCardsList"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.weddingCardsList">[docs]</a><span class="k">def</span> <span class="nf">weddingCardsList</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="n">cat_wedding</span> <span class="o">=</span><span class="s1">&#39;wedding&#39;</span>
+	<span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+	<span class="n">cards_data</span> <span class="o">=</span> <span class="n">addCards</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">cat_wedding</span><span class="p">)</span>
+	<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">cardform</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">cardform</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+			<span class="c1"># return HttpResponse(&#39;Card Saved Successfully&#39;)</span>
+
+		
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Wedding Cards&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;cardform&#39;</span><span class="p">:</span> <span class="n">cardform</span><span class="p">,</span>
+		<span class="s1">&#39;cards_data&#39;</span><span class="p">:</span> <span class="n">cards_data</span>
+		<span class="c1"># &#39;cards&#39;:cards,</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/cards/wedding_cards.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="birthdayCardsList"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.birthdayCardsList">[docs]</a><span class="k">def</span> <span class="nf">birthdayCardsList</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="n">cat_birth</span> <span class="o">=</span> <span class="s2">&quot;birthday&quot;</span>
+	<span class="n">cards_data</span> <span class="o">=</span> <span class="n">addCards</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">cat_birth</span><span class="p">)</span>
+	<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">cardform</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">cardform</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+			<span class="c1"># return HttpResponse(&#39;Card Saved Successfully&#39;)</span>
+
+		
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Birthday Cards&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;cardform&#39;</span><span class="p">:</span> <span class="n">cardform</span><span class="p">,</span>
+		<span class="s1">&#39;cards_data&#39;</span><span class="p">:</span> <span class="n">cards_data</span>
+		<span class="c1"># &#39;cards&#39;:cards,</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/cards/birthday_cards.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="inaugurationcardsList"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.inaugurationcardsList">[docs]</a><span class="k">def</span> <span class="nf">inaugurationcardsList</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="n">cat_inaug</span> <span class="o">=</span> <span class="s2">&quot;inauguration&quot;</span>
+	<span class="n">cards_data</span> <span class="o">=</span> <span class="n">addCards</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">cat_inaug</span><span class="p">)</span>
+	<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		<span class="n">cardform</span> <span class="o">=</span> <span class="n">CardForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">cardform</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">cardform</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+			<span class="c1"># return HttpResponse(&#39;Card Saved Successfully&#39;)</span>
+
+		
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Inauguration Cards&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;cardform&#39;</span><span class="p">:</span> <span class="n">cardform</span><span class="p">,</span>
+		<span class="s1">&#39;cards_data&#39;</span><span class="p">:</span> <span class="n">cards_data</span>
+		<span class="c1"># &#39;cards&#39;:cards,</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/cards/inauguration_cards.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="editCard"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.editCard">[docs]</a><span class="k">def</span> <span class="nf">editCard</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+	<span class="n">card_data</span> <span class="o">=</span> <span class="n">addCards</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Edit Card&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;card_data&#39;</span><span class="p">:</span> <span class="n">card_data</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/edit-card.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>	</div>
+
+<div class="viewcode-block" id="emails"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.emails">[docs]</a><span class="k">def</span> <span class="nf">emails</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="n">send_data</span> <span class="o">=</span> <span class="n">SendMailForm</span><span class="p">()</span>
+
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		<span class="n">send_data</span> <span class="o">=</span> <span class="n">SendMailForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">send_data</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">cred</span> <span class="o">=</span> <span class="n">Email_model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+			<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cred</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+					<span class="n">usermail</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">email</span>
+					<span class="n">userpass</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">password</span>
+			<span class="n">sub</span> <span class="o">=</span> <span class="n">send_data</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]</span>
+			<span class="n">msg</span> <span class="o">=</span> <span class="n">send_data</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+			<span class="n">to</span> <span class="o">=</span> <span class="n">send_data</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span>
+			<span class="n">from_email</span> <span class="o">=</span> <span class="n">usermail</span>
+			<span class="n">res</span> <span class="o">=</span> <span class="n">send_mail</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">from_email</span><span class="p">,</span> <span class="p">[</span><span class="n">to</span><span class="p">],</span> <span class="n">fail_silently</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">auth_user</span><span class="o">=</span><span class="n">usermail</span><span class="p">,</span> <span class="n">auth_password</span><span class="o">=</span><span class="n">userpass</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+				<span class="n">send_data</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+				<span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Mail sent successfully!&#39;</span><span class="p">)</span>
+				<span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="s1">&#39;/dashboard/emails&#39;</span><span class="p">)</span>
+
+
+	<span class="n">data</span> <span class="o">=</span> <span class="n">sendEmails</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Email&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;send_data&#39;</span><span class="p">:</span> <span class="n">send_data</span><span class="p">,</span>
+		<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/emails.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="settings"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.settings">[docs]</a><span class="k">def</span> <span class="nf">settings</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+	<span class="n">smtp_active_mail</span> <span class="o">=</span> <span class="n">Email_model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+	<span class="n">email_form</span> <span class="o">=</span> <span class="n">Email_form</span><span class="p">()</span>
+
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		
+		<span class="n">email_form</span> <span class="o">=</span> <span class="n">Email_form</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">email_form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">email</span> <span class="o">=</span> <span class="n">email_form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+			<span class="n">password</span> <span class="o">=</span> <span class="n">email_form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+			<span class="n">smtp_active_mail</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Settings&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;smtp_form&#39;</span><span class="p">:</span> <span class="n">email_form</span><span class="p">,</span>
+		<span class="s1">&#39;smtp_active_mail&#39;</span><span class="p">:</span> <span class="n">smtp_active_mail</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/settings.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+	
+<div class="viewcode-block" id="profile"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.profile">[docs]</a><span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+	<span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Profile&#39;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;dashboard/profile.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="videoCreation"><a class="viewcode-back" href="../_dashboard_modules/views.html#dashboard.views.videoCreation">[docs]</a><span class="k">def</span> <span class="nf">videoCreation</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+		<span class="n">base_dir</span> <span class="o">=</span> <span class="s2">&quot;media/&quot;</span>
+		<span class="n">path</span> <span class="o">=</span>  <span class="s2">&quot;card_video_file/&quot;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+		<span class="n">card_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;card_id&#39;</span><span class="p">]</span>
+		<span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;http://&quot;</span><span class="o">+</span><span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="p">[</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">]</span>
+		<span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;.webm&quot;</span>
+		<span class="n">raw_file</span> <span class="o">=</span> <span class="n">base_dir</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;video_file_&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">extension</span>
+		<span class="n">output_file</span> <span class="o">=</span>  <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;output&quot;</span><span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">extension</span>
+		
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">base_dir</span> <span class="o">+</span> <span class="n">path</span><span class="p">):</span>
+			<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">base_dir</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
+
+		
+		<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">raw_file</span><span class="p">,</span> <span class="s1">&#39;wb+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">destination</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;blob&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">chunks</span><span class="p">():</span>
+				<span class="n">destination</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+
+		<span class="n">card_data</span> <span class="o">=</span> <span class="n">addCards</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">card_id</span><span class="p">)</span>
+
+		<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">card_data</span><span class="p">:</span>
+			<span class="n">audio_url</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">url</span>
+
+		<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;ffmpeg -i &quot;</span><span class="o">+</span><span class="n">raw_file</span><span class="o">+</span><span class="s2">&quot; -i &quot;</span><span class="o">+</span><span class="n">host</span><span class="o">+</span><span class="n">audio_url</span><span class="o">+</span><span class="s2">&quot; -c copy -map 0:0 -map 1:0 &quot;</span> <span class="o">+</span> <span class="n">base_dir</span> <span class="o">+</span> <span class="n">output_file</span><span class="p">)</span>
+		<span class="n">vid</span> <span class="o">=</span> <span class="n">createdVideos</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="n">output_file</span><span class="p">,</span> <span class="n">user_rel</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+		<span class="n">vid</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+		<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">raw_file</span><span class="p">):</span>
+		    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">raw_file</span><span class="p">)</span>
+
+	<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s2">&quot;success_data&quot;</span><span class="p">:</span> <span class="s2">&quot;successfully saved&quot;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Webllisto
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
