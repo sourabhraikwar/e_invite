@@ -2,7 +2,7 @@
 body, html{
 	background: #e5e5e5;
 	width: 100%;
-	min-height: 100vh;
+	/*min-height: 100vh;*/
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -201,4 +201,69 @@ div#cards_list a{
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+/*home page css*/
+.card_img_wr {
+	position: relative;
+	width: 100%;
+	height: 600px;
+	/*background-color: #fff;*/
+}
+
+/*
+.card_img_wr:first-child{
+	background-image: linear-gradient(to right top, #363b67, #4b4772, #60537e, #746089, #876d94, #876d94, #876d94, #876d94, #746089, #60537e, #4b4772, #363b67);	
+}
+
+.card_img_wr:nth-child(2){
+	background-image: linear-gradient(to right top, #805b70, #866c84, #8c7e95, #9490a5, #9ea1b2, #9fa8bb, #9fb0c3, #9fb8ca, #8ebacd, #7bbccc, #68bfc5, #5ac0ba);
+}
+
+.card_img_wr:nth-child(3){
+	background-image: linear-gradient(to right, #7f5283, #845989, #886090, #8d6896, #926f9c, #94729d, #96749f, #9877a0, #97769d, #96749a, #957397, #947294);
+}
+*/
+.slick-prev, .slick-next{
+	position: absolute!important;
+	z-index: 999;
+}
+
+.slick-prev{
+    top: 50%;
+    left: 30px;
+}
+
+.slick-next{
+    top: 50%;
+    right: 30px;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: red;
+    font-size: x-large;
+}
+
+.slick-dots{
+	bottom: 30px!important;
+}
+
+.card_img {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    width: 450px;
+    transform: translate(-10%,-50%);
+    box-shadow: 0 0 10px 4px lightgrey;
+}
+
+.card_img:first-child {
+}
+
+.card_desc {
+    position: absolute;
+    top: 50%;
+    left: 16%;
+    width: 450px;
+    transform: translate(-16%,-50%);
 }

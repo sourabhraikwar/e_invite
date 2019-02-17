@@ -1,3 +1,16 @@
+"""
+This module contain urls of invi_card modules.
+
+Imported methods
+----------------
+
+these method imported from invi_cards.views module.
+
+* home
+* reset
+* signup
+
+"""
 from django.urls import path
 from .views import *
 

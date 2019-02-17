@@ -9,6 +9,10 @@ from .models import *
 # Create your views here.
 
 def home(request):
+	"""
+	Home page defined here
+
+	"""
 	context = {
 		'title': 'Home',
 	}
@@ -16,6 +20,13 @@ def home(request):
 	return render(request, 'invi_cards/home.html', context)
 
 def reset(request):
+	"""
+	Reset Password Defined here
+
+	Modules in use:
+
+	* Login_form from invi_cards.forms
+	"""
 	usr_err=""
 	if request.method == 'POST':
 		form = Login_form(request.POST)
@@ -41,6 +52,14 @@ def reset(request):
 	return render(request, 'registration/password_reset_form.html', context)
 
 def signup(request):
+	"""
+	Signup or Create new account method defined here
+
+	Modules in use:
+
+	* Signup_form from invi_cards.forms
+
+	"""
 	if request.method == 'POST':
 		form = Signup_form(request.POST)
 		if form.is_valid():

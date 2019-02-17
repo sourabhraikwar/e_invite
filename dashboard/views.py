@@ -11,7 +11,7 @@ import os, socket
 # Create your views here.
 
 def dashboard(request):
-
+	"""this method containing dashboard functionality"""
 	video_list = createdVideos.objects.filter(user_rel=request.user.id)
 	context = {
 		'title': 'Dashboard',

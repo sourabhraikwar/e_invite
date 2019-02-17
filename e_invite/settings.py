@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'invi_cards',
     'dashboard',
     'widget_tweaks',
+    'sphinx',
 ]
 
 MIDDLEWARE = [
