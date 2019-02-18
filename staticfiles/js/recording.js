@@ -6,18 +6,8 @@ let recordedBlobs;
 let sourceBuffer;
 
 const canvas = document.querySelector('canvas#animation');
-// const video = document.querySelector('video');
-
-// const recordButton = document.querySelector('button#record');
-// const stopButton = document.querySelector('button#stop');
-// // const playButton = document.querySelector('button#play');
 const downloadButton = document.querySelector('button#download');
-// recordButton.onclick = toggleRecording;
-// // playButton.onclick = play;
 downloadButton.onclick = download;
-
-// Start the GL teapot on the canvas
-// main();
 
 const stream = canvas.captureStream(); // frames per second
 console.log('Started stream capture from canvas element: ', stream);
@@ -37,17 +27,13 @@ function handleDataAvailable(event) {
 function handleStop(event) {
   console.log('Recorder stopped: ', event);
   const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
-  // video.src = window.URL.createObjectURL(superBuffer);
 }
 
 function toggleRecording() {
   if (recordButton.textContent === 'Start Recording') {
     startRecording();
   } else {
-    // stopRecording();
-    // downloadButton.disabled = false;
-    // recordButton.textContent = 'Start Recording';
-    // playButton.disabled = false;
+
   }
 }
 
@@ -77,8 +63,6 @@ function startRecording() {
     }
   }
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
-  // recordButton.textContent = 'Stop Recording';
-  // playButton.disabled = true;
   downloadButton.disabled = true;
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
@@ -89,52 +73,7 @@ function startRecording() {
 function stopRecording() {
   mediaRecorder.stop();
   console.log('Recorded Blobs: ', recordedBlobs);
-  // video.controls = true;
 }
-
-// function play() {
-//   video.play();
-// }
-
-// function download() {
-//   const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-//   const url = window.URL.createObjectURL(blob);
-//   const a = document.createElement('a');
-//   a.style.display = 'none';
-//   a.href = url;
-//   a.download = 'test.webm';
-//   document.body.appendChild(a);
-//   a.click();
-//   setTimeout(() => {
-//     document.body.removeChild(a);
-//     window.URL.revokeObjectURL(url);
-//   }, 100);
-// }
-
-// function download() {
-//   console.log(recordedBlobs);
-//   $.ajax({
-//     type: "POST",
-//     dataType: "json",
-//     data: JSON.stringify(recordedBlobs),
-//     url: "http://localhost:8000/dashboard/videoCreation",
-//     success: function(msg){
-//       console.log(msg);
-//      }
-//   });
-// }
-
-
-// function download() {
-//   let blob = new Blob(recordedBlobs, {type: 'video/webm'});
-//   let fd = new FormData;
-//   fd.append("audioRecording", blob);
-//   fetch("http://localhost:8000/dashboard/videoCreation", {method:"POST", body:fd})
-//   .then(response => response.ok)
-//   .then(res => console.log(res))
-//   .catch(err => console.error(err));
-// }
-// using jQuery
 
 function getCookie(name) {
     var cookieValue = null;
@@ -153,16 +92,21 @@ function getCookie(name) {
 }
 
 var csrftoken = getCookie('csrftoken');
-
+var card_id = document.getElementById('card_id').textContent; 
+console.log(card_id);
 function download() {
   let blob = new Blob(recordedBlobs, {type: 'video/webm'});
   let fd = new FormData;
   fd.append("blob", blob);
+  fd.append("card_id", card_id);
   fd.append("csrfmiddlewaretoken" , csrftoken);
   let request = new XMLHttpRequest();
   request.open("POST", "http://localhost:8000/dashboard/videoCreation", true);
-  request.onload = function() {
-    // do stuff
+  request.onload = msg => {
+    var obj = JSON.parse(msg.target.responseText);
+    if (obj.success_data == "successfully saved") {
+      window.location.href = "http://localhost:8000/dashboard";
+    }
   }
   request.onerror = function() {
    // handle error

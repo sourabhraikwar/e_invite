@@ -1,40 +1,43 @@
 // datatable js start here
 
-$('.myTable').dataTable( {
-  "columns": [
-    null,
-    null,
-    null,
-    null,
-    {
-      "data": "office", // can be null or undefined
-      "defaultContent": ""
-    }
-  ]
-} );
+$(document).ready(function(){
+  $('.myTable').dataTable( {
+    "columns": [
+      null,
+      null,
+      null,
+      null,
+      {
+        "data": "office", // can be null or undefined
+        "defaultContent": ""
+      }
+    ]
+  } );
 
-$('.email-table').dataTable( {
-  "columns": [
-    null,
-    null,
-    {
-      "data": "office", // can be null or undefined
-      "defaultContent": ""
-    }
-  ]
-} );
+  $('.email-table').dataTable( {
+    "columns": [
+      null,
+      null,
+      {
+        "data": "office", // can be null or undefined
+        "defaultContent": ""
+      }
+    ]
+  } );
 
 // datatable js end here
 
-$(document).ready(function(){
   $("#cards").click(function(){
     $("#cards_list").slideToggle();
   });
 });
 
-// const audio = new Audio();
+$(document).ready(function(){
+  $('.card_slider').slick({
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+  });
+});
 
-//     .then(stream => {
-//     const mediaRecorder = new MediaRecorder(stream);
-//     mediaRecorder.start();
-// });

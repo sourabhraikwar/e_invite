@@ -4,6 +4,7 @@ from django import *
 
 
 class Email_form(ModelForm):
+	"""this module sends form"""
 	password = CharField(widget=forms.PasswordInput)
 	class Meta:
 		model = Email_model
