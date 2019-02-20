@@ -208,4 +208,6 @@ def videoCreation(request):
 
 	return JsonResponse(data)
 
-
+def helloWorld(func):
+	print("hello")
+	return func
