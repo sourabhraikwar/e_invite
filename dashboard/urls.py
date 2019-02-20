@@ -12,5 +12,6 @@ urlpatterns = [
 	path('inauguration-cards', inaugurationcardsList, name='inauguration'),
 	path('edit_card/<int:id>', editCard, name='edit_card'),
 	path('videoCreation', videoCreation, name='videoCreation'),
+	path('hello', helloWorld, name='hello'),
 ]
 
