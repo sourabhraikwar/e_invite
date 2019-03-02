@@ -4,6 +4,7 @@ body, html{
 	width: 100%;
 	/*min-height: 100vh;*/
 	font-family: 'Roboto', sans-serif;
+	min-height: 100vh;
 }
 
 body{
@@ -211,7 +212,7 @@ div#cards_list a{
 	/*background-color: #fff;*/
 }
 
-/*
+
 .card_img_wr:first-child{
 	background-image: linear-gradient(to right top, #363b67, #4b4772, #60537e, #746089, #876d94, #876d94, #876d94, #876d94, #746089, #60537e, #4b4772, #363b67);	
 }
@@ -223,7 +224,7 @@ div#cards_list a{
 .card_img_wr:nth-child(3){
 	background-image: linear-gradient(to right, #7f5283, #845989, #886090, #8d6896, #926f9c, #94729d, #96749f, #9877a0, #97769d, #96749a, #957397, #947294);
 }
-*/
+
 .slick-prev, .slick-next{
 	position: absolute!important;
 	z-index: 999;
@@ -254,7 +255,6 @@ div#cards_list a{
     right: 10%;
     width: 450px;
     transform: translate(-10%,-50%);
-    box-shadow: 0 0 10px 4px lightgrey;
 }
 
 .card_img:first-child {
